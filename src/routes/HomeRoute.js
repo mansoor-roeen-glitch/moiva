@@ -86,10 +86,9 @@ export default function HomeRoute(props) {
     }, [])
 
     return (
-        <div className="h-main-o-wrapper">
-            <div className="h-main-i-wrapper">
-                <HeaderElement screenSize={{screenHeight, screenWidth}} />
-            </div>
+        <div className="h-o-wrapper" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <HeaderElement screenSize={{screenHeight, screenWidth}} />
+        <HeroElement screenSize={{screenHeight, screenWidth}} />
         </div>
     )
 }

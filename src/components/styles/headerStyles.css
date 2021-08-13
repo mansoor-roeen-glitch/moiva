@@ -1,11 +1,14 @@
 .header-outer-wrapper {
-    position: relative;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
     
     width: 100%;
     height: 65px;
 
     top: 0px;
-    background: var(--main-bg);
+    background: var(--h-bg);
     opacity: .9;
 
     display: flex;
@@ -251,7 +254,7 @@
     background: var(--cyan);
 }
 
-@media screen and (max-width: 1435px) {
+@media screen and (max-width: 1470px) {
     .h-i-navbar {
         margin-right: 120px;
     }

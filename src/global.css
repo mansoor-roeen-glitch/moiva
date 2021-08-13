@@ -5,6 +5,7 @@
 :root {
 	--cyan: #76F5D7; 
 	--main-bg: #0B182F;
+	--h-bg: #0b182ff1; 
 	--sec-white: #F1F1F1;
 	--main-white: #FFFFFF;
 	--rd-white: #BBBBBB;
@@ -14,6 +15,7 @@
 	--login-btn-bg: #585c6442; 
 	--d-cyan: #559988; 
 	--n-bg: #050b16;
+	--h-1-white: #FCFCFC;
 }
 
 * {
@@ -27,4 +29,6 @@ html, body {
 	position: relative;
 	width: 100%;
 	height: 100%;
+	background: var(--main-bg);
+	z-index: -1;
 }
