@@ -1,94 +1,72 @@
 import React, {useState, useEffect} from 'react'
 import { Redirect } from 'react-router';
-import { gethome } from '../functions/extra/fetch';
-import { apend, apkey, tmdbkey, tmdbend } from '../utils/env';
-import sortList from '../functions/sort/sort'
 import HeaderElement from '../components/HeaderElement';
 import HeroElement from '../components/HeroElement';
-import LayoutElement from '../components/LayoutElement';
+import GridElement from '../components/GridElement';
+import { getCorsUrl, homeScrapper } from '../utils/env';
 
 export default function HomeRoute(props) {
     
     const [input, setInput] = useState("")
-    const [results, setResults] = useState()
+    const [results, setResults] = useState({
+        comingSoon: new Array(24).fill(null), 
+        latestMovies: new Array(24).fill(null), 
+        latestShows: new Array(24).fill(null), 
+        popularMovies: new Array(24).fill(null), 
+        popularShows: new Array(24).fill(null)})
+
+    const [resultError, setResultError] = useState(false)
+    const [resultLoading, setResultLoading] = useState(true);
+
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(true);
     const [redirect, setRedirect] = useState(false);
-    const [redirectPathname, setRedirectPathname] = useState(null);
+    const [redirectPathname, setRedirectPathname] = useState(null);  
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    const [screenHeight, setScreenHeight] = useState(window.innerHeight)
-    
-    function handleResize () {
-      setScreenWidth(window.innerWidth);
-      setScreenHeight(window.innerHeight);
-    }
-  
+    async function getResponse (url) {
+      url = getCorsUrl(url)
+      let result = await fetch(url)
+        .then(res => res.json())
+        .catch(error => error)
 
-    const findContent = (event) => {
-        let id;
-        let slug;
+      console.log(result)
 
-        if (!event.target.dataset) {
-        return; // Error handler 
-        } 
+      if (result.success === false || !result.statuscode === 200) {
+        setResultError(result);
+        setResultLoading(false);
+        return result;
+      }
 
-        if (event.target.dataset.imdbid) {
-            id = event.target.dataset.imdbid.slice(2)
-            slug = event.target.dataset.title.toLowerCase().replaceAll("-", "").split(" ").join("-").replaceAll(".", "").replaceAll(":", "")
-
-        } else {
-            return;
-        }
-
-        setRedirectPathname(`/${event.target.dataset.type}/${id}/${slug}`)
-        setRedirect(true);
-    } 
-
-    const getHome = async () => {  
-
-        setLoading(true)
-        let homeRes = await gethome(apkey, apend, "IMDB")
-
-        if (homeRes.success !== true) {
-            setError(homeRes)
-            setLoading(false)
-            return; // Error handler
-        }
-
-        let showsSorted = sortList(homeRes.tv.items)
-        let moviesSorted = sortList(homeRes.movies.items)
-
-        setResults({showsSorted, moviesSorted})
-        setLoading(false)
-
-    }
-
-    const search = (term) => {
-        console.log(term)
-    }
-
-    const renderRedirect = () => {
-        if (redirect) {
-            return (
-                <Redirect to={{pathname: redirectPathname}} />
-            )
-        }
+      setResults(result.results)
+      setResultLoading(false);
 
     }
 
     useEffect(() => {
-        
-        // Doing the things required before page loads
-        // getHome()
-        document.addEventListener("resize", handleResize)
-        
+      getResponse(homeScrapper)
     }, [])
 
     return (
-        <div className="h-o-wrapper" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <HeaderElement screenSize={{screenHeight, screenWidth}} />
-        <HeroElement screenSize={{screenHeight, screenWidth}} />
+        <div className="h-o-wrapper" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>        
+            <HeaderElement screenSize={props.screenSize} handleHambClick={props.handleHambClick} />
+            <HeroElement screenSize={props.screenSize} />
+            <div className="h-s-1-gap" style={{width: "100%", height: "70px"}}></div>
+            
+            <div className="h-grid-sec-wrapper" style={{width: "100%", height: "auto"}}>
+
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.popularMovies} sort={"Trending"} type="movie" />
+                <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.latestMovies} sort={"Latest"} type="movie" />
+                <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.popularShows} sort={"Popular shows"} type="show" />
+                <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.latestShows} sort={"Latest shows"} type="show" />
+                <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.comingSoon} sort={"Coming Soon"} type="movie" />
+                <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
+
+            </div>
+        
         </div>
     )
 }

@@ -1,29 +1,25 @@
-export function getitem (id, apkey, apend, source) {
-    return fetch(`${apend}/?apikey=${apkey}&i=${id}&type=series&plot=full`)
-    .then(res => res.json()).then(data => data).catch(err => console.log(err))
+export function getitem (query, apend, apkey, source, type) {
+    return fetch(`${apend}search/${type}?query=${query}&api_key=${apkey}`)
+    .then(res => res.json()).then(data => {return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 404, tmdbSuccess: false}})
 }
 
-export async function gethome (apkey, apend, source) {
+export function searchitem (query, apend, apkey, source) {
+    return fetch(`${apend}search/multi?query=${encodeURIComponent(query)}&api_key=${apkey}`)
+    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
+}
 
-    let results;
-    let error;
+export function getbyid (id, apkey, type, apc) {
+    return fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=${apkey}&append_to_response=videos,images${apc ? ",credits" : ""}`)
+    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: data.length > 0 ? true : false}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
+}
 
-    let tvshows = await fetch(`${apend}MostPopularTvs/${apkey}`).then((res) => res.json()).catch((err) => {error = err; console.log(err)})
-    let movies = await fetch(`${apend}MostPopularMovies/${apkey}`).then((res) => res.json()).catch((err) => {error = err; console.log(err)})
+export function getcredits (id, apkey, type) {
+    return fetch(`https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apkey}`)
+    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: data.cast ? true : false}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
+}
 
-    if (typeof tvshows.errorMessage !== "undefined") {
-        error = tvshows.errorMessage
-    } else if (typeof movies.errorMessage !== "undefined") {
-        error = movies.errorMessage
-    } else if (typeof tvshows.errorMessage !== "undefined" && typeof movies.errorMessage !== "undefined") {
-        error = {tvError: tvshows.errorMessage, movieError: movies.errorMessage}
-    }
-
-    if (error) {
-        return {success: false, status: 500, message: error}
-    } 
-
-    results = {tv: tvshows, movies: movies, source: source, success: true}
-    return results;
-
+export function getseasondetails (id, apkey, seasonNumber) {
+    console.log(id, apkey, seasonNumber)
+    return fetch(`http://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${apkey}`)
+    .then(res => res.json().then(data => { return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}}))
 }

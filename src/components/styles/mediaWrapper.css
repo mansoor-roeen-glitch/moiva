@@ -1,0 +1,138 @@
+.media-wrapper {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.media-wrapper-header-wrapper {
+    margin-bottom: 30px;
+    width: 100%;
+    
+    width: auto;
+    height: auto;
+}
+
+.media-wrapper-header {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--main-white);
+}
+
+.media-wrapper-header-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.media-wrapper-h-t-wrapper {
+    margin-right: 70px;
+}
+
+.media-w-h-c-wrapper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: fit-content;
+    align-items: center;
+}
+
+.media-checkbox-wrapper {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+.media-checkbox-text {
+    font-size: 19px;
+    color: var(--sec-white);
+    font-weight: 300;
+    text-align: center;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.media-checkbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.media-checkbox-text-number {
+    color: var(--fr-white);
+    opacity: .9;
+    font-weight: 200;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.media-checkbox-wrapper.active .media-checkbox-underline {
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--fr-white);
+}
+
+.media-wrapper-grid-wrapper {
+    width: auto;
+    height: auto;
+}
+
+.media-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-bottom: 50px;
+    padding-bottom: 15px;
+}
+
+.media-grid-item {
+    height: 260px;
+    width: auto;
+}
+
+.media-grid-item-i-w {
+    width: auto;
+    height: 260px;
+}
+
+.media-grid-item-i {
+    width: auto;
+    height: 260px;
+}
+
+.media-grid-item-v {
+    height: auto;
+    width: 470px;
+}
+
+.media-grid-item-v-w {
+    width: 470px;
+    height: auto;
+}
+
+.media-grid-item-i-v {
+    width: 500px;
+    height: 290px;
+}
+
+
+.media-grid-overlay-right {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+
+    width: 13%;
+    pointer-events: none;   
+    background: linear-gradient(90deg, transparent, #0B182F);
+    border-right: solid 2px var(--main-bg);
+}

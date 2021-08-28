@@ -14,8 +14,10 @@ import HomeRoute from './routes/HomeRoute';
 import MovieItem from './routes/MovieRoute';
 import ShowPlayer from './routes/ShowStreaming';
 import MoviePlayer from './routes/MovieStreaming';
+import MobNav from './components/sub-comps/MobNav.js';
 
 import "./global.css";
+import SearchRoute from "./routes/SearchRoute";
 
 function App(props) {
   
@@ -24,26 +26,66 @@ function App(props) {
   const [success, setSuccess] = useState();
   const [loading, setLoading] = useState();
 
-  async function detailHandler (props) {
-    console.log(props)
+  const [isNavActive, setIsNavActive] = useState(false)
+  
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight)
+  
+  function handleResize () {
+    setScreenWidth(window.innerWidth);
+    setScreenHeight(window.innerHeight);
   }
 
+  const handleHambClick = () => {
+      if (isNavActive === "active") {
+          setIsNavActive("closed")
+      } else if (isNavActive === "closed") {
+          setIsNavActive("active")
+      } else {
+          setIsNavActive("active")
+      }
+  }
+
+  document.addEventListener("click", (event) => {
+      if (isNavActive === "active") {
+          let cn = event.target.className;
+      
+          if (
+              cn === "r-selected navbar-item-link-text navbar-item-text" ||
+              cn === "mob-navbar-item-link-text navbar-item-text" ||
+              cn === "mob-navbar-item-list-text navbar-item-text" || 
+              cn === "mob-nav h-mob-nav-active" ||
+              cn === "mob-navbar" || 
+              cn === "h-i-hamb-wrapper") {
+                  return "";
+              } else {
+                  setIsNavActive("closed")
+              }
+      }
+  })
   
+  window.addEventListener("resize", handleResize)
+
 
   return (
-    <Router>
+    <Router>  
+
+      {screenWidth <= 940 && (
+        <MobNav isActive={isNavActive} />
+      ) }
+
       <Switch>
 
         <Route path="/" exact>
-          <HomeRoute />
+          <HomeRoute handleHambClick={handleHambClick} screenSize={{screenWidth, screenHeight}} />
         </Route>
 
         <Route path="/movie/:movieId">
-          <MovieItem />
+          <MovieItem handleHambClick={handleHambClick} screenSize={{screenWidth, screenHeight}} />
         </Route>
 
         <Route path="/show/:showId">
-          <ShowItem />
+          <ShowItem handleHambClick={handleHambClick} screenSize={{screenWidth, screenHeight}} />
         </Route>
 
         <Route path="/movie/:movieId/player">
@@ -52,6 +94,10 @@ function App(props) {
 
         <Route path="/show/:showId/player">
           <ShowPlayer />
+        </Route>
+
+        <Route path="/search/:query" exact>
+          <SearchRoute handleHambClick={handleHambClick} screenSize={{screenWidth, screenHeight}} />
         </Route>
 
         <Route path="/">

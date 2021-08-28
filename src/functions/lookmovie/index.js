@@ -1,12 +1,11 @@
 import lookmovie from "./lookmovie.js";
 
-export async function findContent (details, type) {   
-    
-    if(!details) {
+export async function findContent (title, year, type) {   
+    if(!title || !year || !type) {
         return; // We will respond with an error
     }
 
-    const content = await lookmovie.findContent({title: details.title, year: details.year}, type)
+    const content = await lookmovie.findContent({title: title, year: year}, type)
     return content;
 }
 

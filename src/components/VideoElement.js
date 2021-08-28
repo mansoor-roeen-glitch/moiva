@@ -5,7 +5,7 @@ export default function VideoElement(props) {
 
     const [progress, setProgress] = useState();
     const [error, setError] = useState(false);
-
+    
     const videoRef = React.useRef(null);
 
 
@@ -32,18 +32,18 @@ export default function VideoElement(props) {
             hls.loadSource(props.streamOptions.url);
         }
 
-    }, [videoRef, props.streamOptions.url, props.streamLoading])
+    }, [videoRef, props.streamOptions, props.streamLoading])
 
     if (error)
-        return (<h2>Your browser is not supported</h2>)
+        return (<h2 className="h2-message">Your browser is not supported</h2>)
 
     if (props.streamLoading)
-        return <h2>loading episode...</h2>
+        return <h2 className="h2-message">loading {props.streamType} ...</h2>
     
     if (!props.streamOptions.url || props.streamOptions.url.length === 0)
-        return <h2>No video selected</h2>
+        return <h2 className="h2-message">No video selected</h2>
 
-    if (!props.streamOptions.url.endsWith('.mp4')) {
+    if (!props.streamOptions.url.endsWith('.mp4')) { 
         return (
             <video className="videoElement" ref={videoRef} controls autoPlay onProgress={setProgress} />
         )

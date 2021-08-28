@@ -1,10 +1,6 @@
 import JSON5 from 'json5';
+import { getCorsUrl } from '../../utils/env';
 import errorHandler from '../extra/errorhandler';
-
-// Getting cors url .. pretty straight forward ig
-const getCorsUrl = (url) => {
-    return `https://movie-web-proxy.herokuapp.com/${url}`;
-}
 
 // Access token ..
 async function getAccessToken(config) {
@@ -132,7 +128,6 @@ async function getStreamUrl (slug, type, season, episode) {  // Not available ye
     );
 
     let id = '';
-
     if (type === "movie") {
         id = data.id_movie;
     } else if (type === "show") { 

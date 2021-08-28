@@ -11,11 +11,13 @@
 	--rd-white: #BBBBBB;
 	--ft-white: #DDDDDD;
 	--fr-white: #d4d4d4;
-	--card-bg: #dfe8f911;
+	--card-bg: rgba(223, 232, 249, 0.05);
 	--login-btn-bg: #585c6442; 
 	--d-cyan: #559988; 
 	--n-bg: #050b16;
 	--h-1-white: #FCFCFC;
+	--star-yellow: #ECA51B;
+	--i-btn-bg: rgba(240, 240, 240, 0.05); 
 }
 
 * {
@@ -30,5 +32,12 @@ html, body {
 	width: 100%;
 	height: 100%;
 	background: var(--main-bg);
-	z-index: -1;
+
 }
+
+::-webkit-scrollbar { width: 12px; height: 10px;}
+::-webkit-scrollbar-track {  background-color: #ffffff05;}
+::-webkit-scrollbar-track-piece { background-color: #ffffff06;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #ffffff20; border-radius: 2px;}
+::-webkit-scrollbar-corner { background-color: #ffffff20;}
+::-webkit-resizer { background-color: #ffffff20;}

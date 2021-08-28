@@ -1,0 +1,125 @@
+.cast-wrapper {
+    width: 100%;
+    height: fit-content;
+
+    background-color: var(--main-bg);
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.cast-sec-header-wrapper {
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.cast-header {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--main-white);
+}
+
+.cast-header-line {
+    margin-top: 5px;
+    width: 60%;
+    height: 3px;
+    background-color: var(--cyan);
+}
+
+.cast-grid {
+    width: 100%;
+    height: auto;
+
+    background: transparent;   
+}
+
+.cast-grid-list {
+    width: 100%;
+    height: fit-content;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+}
+
+.cast-grid-item {
+    width: 172px;
+    height: 370px;
+
+    background-color: #FFFFFF08;
+    border: solid 1px #0B182F09;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+
+.cast-grid-item-i-wrapper {
+    width: 100%;
+    height: 100%;
+
+    background: transparent;    
+    position: relative;
+}
+
+.cast-grid-item-i {
+    width: 172px;
+    height: 235px;
+}
+
+.cast-grid-item-details {
+    width: 92%;
+    height: fit-content;
+
+    background: transparent;
+    height: 100%;
+    padding-top: 10px;
+}
+
+.cast-grid-item-details-rname {
+    margin-bottom: 5px;
+}
+
+.cast-grid-item-details-rname-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--main-white);
+    display: block;
+}
+
+.cast-grid-item-details-cname-text {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--fr-white);
+}
+
+.cast-grid-item-i-overlay {
+    width: 172px;
+}
+
+.cast-grid{
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.cast-grid-overlay-right {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+
+    width: 13%;
+    pointer-events: none;   
+    background: linear-gradient(90deg, transparent, #0B182F);
+
+}
+
