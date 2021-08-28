@@ -12,8 +12,6 @@ import {
 import ShowItem from './routes/ShowRoute';
 import HomeRoute from './routes/HomeRoute'; 
 import MovieItem from './routes/MovieRoute';
-import ShowPlayer from './routes/ShowStreaming';
-import MoviePlayer from './routes/MovieStreaming';
 import MobNav from './components/sub-comps/MobNav.js';
 
 import "./global.css";
@@ -86,14 +84,6 @@ function App(props) {
 
         <Route path="/show/:showId">
           <ShowItem handleHambClick={handleHambClick} screenSize={{screenWidth, screenHeight}} />
-        </Route>
-
-        <Route path="/movie/:movieId/player">
-          <MoviePlayer />
-        </Route>
-
-        <Route path="/show/:showId/player">
-          <ShowPlayer />
         </Route>
 
         <Route path="/search/:query" exact>
