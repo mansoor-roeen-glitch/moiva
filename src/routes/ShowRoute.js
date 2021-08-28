@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { apkey, imageBase, tmdbend, tmdbkey } from '../utils/env';
-import {getbyid, getcredits, getitem, getseasondetails} from '../functions/extra/fetch';
+import { imageBase, tmdbend, tmdbkey } from '../utils/env';
+import {getbyid, getitem, getseasondetails} from '../functions/extra/fetch';
 import {findContent, getStreamUrl, findEpisodes} from '../functions/lookmovie/index';
 import VideoElement from '../components/VideoElement';
 import { stringify } from 'json5';
@@ -16,7 +16,6 @@ export default function ShowRoute (props) {
     const [selectedSe, setSelectedSe] = useState(0);
     const [data, setData] = useState();
     const [result, setResult] = useState();
-    const [error, setError] = useState(false);
     const [episodes, setEpisodes] = useState();
     const [loading, setLoading] = useState(true);
     const [streamOptions, setStreamOptions] = useState();
@@ -35,7 +34,6 @@ export default function ShowRoute (props) {
     let response;
 
     useEffect( async () => {
-
         let pathnames = window.location.pathname.split("/");
 
         let query = decodeURIComponent(pathnames[pathnames.length - 1]);
@@ -171,13 +169,13 @@ export default function ShowRoute (props) {
                 
             </div>
 
-            {clicked && (
+            {clicked && !streamError && (
                 <div className="tv-player-wrapper">
                     <VideoElement streamType="episode" streamLoading={streamloading} streamOptions={streamOptions} />
                 </div>
             )}
 
-            {clicked && sDetails && !sLoading && (
+            {clicked && sDetails && !sLoading && episodes && (
                 <div className="tv-e-details">
                     <div className="tv-e-details-wrapper">
                         <div className="tv-e-details-header">

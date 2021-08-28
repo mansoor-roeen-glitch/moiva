@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
@@ -18,12 +17,6 @@ import "./global.css";
 import SearchRoute from "./routes/SearchRoute";
 
 function App(props) {
-  
-  const [error, setError] = useState(); 
-  const [result, setResult] = useState();
-  const [success, setSuccess] = useState();
-  const [loading, setLoading] = useState();
-
   const [isNavActive, setIsNavActive] = useState(false)
   
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -96,7 +89,7 @@ function App(props) {
 
       </Switch>
     </Router>
-  )
+)
 
 }
 

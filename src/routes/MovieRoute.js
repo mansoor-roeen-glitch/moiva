@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { tmdbkey, tmdbend, imageBase, apkey} from '../utils/env';
+import { tmdbkey, tmdbend, imageBase} from '../utils/env';
 import {getbyid, getitem, getcredits} from '../functions/extra/fetch';
 import {findContent, getStreamUrl} from '../functions/lookmovie/index';
 import VideoElement from '../components/VideoElement';
 import errorHandler from '../functions/extra/errorhandler';
 import HeaderElement from '../components/HeaderElement';
 import CastWrapper from '../components/CastWrapper';
-import { Link } from 'react-router-dom';
 import '../components/styles/movieRouteStyles.css'
 import MediaWrapper from '../components/MediaWrapper';
 

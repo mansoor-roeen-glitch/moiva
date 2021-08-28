@@ -7,7 +7,6 @@ import { getCorsUrl, homeScrapper } from '../utils/env';
 
 export default function HomeRoute(props) {
     
-    const [input, setInput] = useState("")
     const [results, setResults] = useState({
         comingSoon: new Array(24).fill(null), 
         latestMovies: new Array(24).fill(null), 
@@ -17,11 +16,6 @@ export default function HomeRoute(props) {
 
     const [resultError, setResultError] = useState(false)
     const [resultLoading, setResultLoading] = useState(true);
-
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(true);
-    const [redirect, setRedirect] = useState(false);
-    const [redirectPathname, setRedirectPathname] = useState(null);  
 
     async function getResponse (url) {
       url = getCorsUrl(url)

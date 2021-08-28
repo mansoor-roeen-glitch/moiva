@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom';
-import { searchitem } from '../../functions/extra/fetch';
-import { tmdbend, tmdbkey } from '../../utils/env';
 
 export default function SearchElement() {
     
