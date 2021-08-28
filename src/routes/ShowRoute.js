@@ -33,8 +33,8 @@ export default function ShowRoute (props) {
 
     let response;
 
-    useEffect( async () => {
-        let pathnames = window.location.pathname.split("/");
+    useEffect( async() => {
+                let pathnames = window.location.pathname.split("/");
 
         let query = decodeURIComponent(pathnames[pathnames.length - 1]);
         let type = pathnames[1];
@@ -169,7 +169,7 @@ export default function ShowRoute (props) {
                 
             </div>
 
-            {clicked && !streamError && (
+            {clicked && (
                 <div className="tv-player-wrapper">
                     <VideoElement streamType="episode" streamLoading={streamloading} streamOptions={streamOptions} />
                 </div>
