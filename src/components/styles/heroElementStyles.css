@@ -116,4 +116,11 @@
     .hero-content-p {
         font-size: 18px;
     }
+
+}
+
+@media screen and (max-width: 643px) {
+    .hero-content-wrapper {
+        padding-top: 40px;
+    }
 }

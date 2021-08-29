@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
 
-    width: 165px;
-    height: 390px;
+    width: 100%;
+    height: 385px;
 
     background: var(--card-bg);
     align-items: center;
@@ -23,7 +23,7 @@
 
 .grid-item-bd {
     width: 100%;
-    height: 245px;
+    height: 100%;
     position: relative;
 }
 

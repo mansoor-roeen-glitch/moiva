@@ -48,9 +48,9 @@ export default function HomeRoute(props) {
             
             <div className="h-grid-sec-wrapper" style={{width: "100%", height: "auto"}}>
 
-                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.popularMovies} sort={"Trending"} type="movie" />
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.popularMovies} sort={"Popular movies"} type="movie" />
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
-                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.latestMovies} sort={"Latest"} type="movie" />
+                <GridElement resultLoading={resultLoading} resultError={resultError} results={results.latestMovies} sort={"Latest movies"} type="movie" />
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
                 <GridElement resultLoading={resultLoading} resultError={resultError} results={results.popularShows} sort={"Popular shows"} type="show" />
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
