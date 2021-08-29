@@ -129,8 +129,6 @@ export default function MovieRoute (props) {
             return;
         }
 
-        console.log(streamUrlResponse)
-
         setStreamOptions({url: streamUrlResponse.url, options: streamUrlResponse.options});
         setStreamloading(false)
         setLoading(false)
@@ -144,7 +142,6 @@ export default function MovieRoute (props) {
     if (!result) {
         return (<h1>Loading</h1>)
     }
-
 
     return (
 
@@ -190,13 +187,13 @@ export default function MovieRoute (props) {
                                         <div className="movie-info-sec-details-c2-r2-c2-list-gap"></div>
                                         
                                         <li className="movie-info-sec-details-c2-r2-c2-item">
-                                            <span className="movie-info-details-c2-r2-c2-item-text movie-info-sec-details-genre">{result.genres[0].name}</span>
+                                            <span className="movie-info-details-c2-r2-c2-item-text movie-info-sec-details-genre">{result.genres.length > 0 && result.genres[0].name }</span>
                                         </li>
 
                                         <div className="movie-info-sec-details-c2-r2-c2-list-gap"></div>
                                         
                                         <li className="movie-info-sec-details-c2-r2-c2-item">
-                                            <span className="movie-info-details-c2-r2-c2-item-text movie-info-sec-details-runtime">1h 39m</span>
+                                            <span className="movie-info-details-c2-r2-c2-item-text movie-info-sec-details-runtime">{result.runtime}</span>
                                         </li>
                                     </ul>
                                </div>

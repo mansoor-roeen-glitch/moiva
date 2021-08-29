@@ -62,7 +62,6 @@ export default function ShowRoute (props) {
         }
 
         let seasonDetails = await getSeasonDetails(results.id, selectedSe)
-        console.log(results)
         if (error || !results || !seasonDetails) {
             return;
         } 
@@ -114,7 +113,6 @@ export default function ShowRoute (props) {
     
     async function getSeasonDetails (id, seasonNumber) {
         let seasonDetails = await getseasondetails(id, tmdbkey, seasonNumber + 1);
-        console.log(seasonDetails)
         if (!seasonDetails.res || !seasonDetails.res.episodes || !seasonDetails.tmdbSuccess) {
             return "error"
         }

@@ -20,7 +20,6 @@ export default function SearchRoute(props) {
         setSearchTerm(query)
 
         let res = await searchitem(query.replaceAll("%20", "+"), tmdbend, tmdbkey, "TMDB");
-        console.log(res.res.results)
         
         if (res.tmdbSuccess) {
             setResults(res.res.results)

@@ -14,7 +14,6 @@ export default function SearchElement() {
         if (event.key === "Enter") {
             handleSearch()
         } else {
-            console.log("someshit")
             setRedirect(false)
         }
     } 
