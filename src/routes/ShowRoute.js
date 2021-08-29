@@ -9,6 +9,7 @@ import HeaderElement from '../components/HeaderElement';
 import CastWrapper from '../components/CastWrapper';
 import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/tvRouteStyles.css"
+import "../components/styles/loader.css"
 
 export default function ShowRoute (props) {
     
@@ -153,7 +154,13 @@ export default function ShowRoute (props) {
     }
 
     if (loading) {
-        return <h1>Loading </h1>
+        return (
+            <div className="laoding-screen">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
+            </div>
+        )
     }
 
     return (
