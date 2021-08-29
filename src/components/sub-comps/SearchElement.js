@@ -26,7 +26,7 @@ export default function SearchElement() {
     const renderRedirect = () => {
 
         if (redirect && searchTerm) {
-            window.location = `http://localhost:3000/search/${encodeURIComponent(searchTerm)}`
+            window.location = `https://moiva.vercel.app/search/${encodeURIComponent(searchTerm)}`
         }
 
     }
