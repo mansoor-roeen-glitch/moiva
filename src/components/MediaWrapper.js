@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../components/styles/mediaWrapper.css'
 import { imageBase } from '../utils/env'
+import LazyImage from './sub-comps/LazyImage'
 
 export default function MediaWrapper({images, videos}) {    
     const [checkedBox, setCheckedBox] = useState("2")
@@ -43,13 +44,13 @@ export default function MediaWrapper({images, videos}) {
                         {checkedBox === "2" ? images.backdrops.map((image, index) => (
                             <li key={index} className="media-grid-item" >
                                 <div className="media-grid-item-i-w">
-                                    <img className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
+                                    <LazyImage  className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
                                 </div>
                             </li>
                         )) : images.posters.map((image, index) => (
                             <li key={index} className="media-grid-item">
                                 <div className="media-grid-item-i-w">
-                                    <img className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
+                                    <LazyImage className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
                                 </div>
                             </li>
                         ))}

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import { Redirect } from 'react-router';
 import HeaderElement from '../components/HeaderElement';
 import HeroElement from '../components/HeroElement';
 import GridElement from '../components/GridElement';

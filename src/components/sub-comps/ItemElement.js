@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 import { imageBase } from '../../utils/env';
+import LazyImage from './LazyImage';
 
 export default function ItemElement({slug, item, type, isSearch}) {
     
@@ -23,7 +24,7 @@ export default function ItemElement({slug, item, type, isSearch}) {
         <li data-id={slug} key={slug} id={slug} className="grid-item-t1">
             
             <Link style={{textDecoration: "none"}} to={`/${type}/${slug}/${encodeURIComponent(name)}${type === "movie" ? `/${isSearch ? year : item.year}` : ""}`} className="grid-item-t1-bd-wrapper">
-                <img className="grid-item-bd" src={isSearch ? `${imageBase}w200/${item.poster_path}` : item.image}></img>
+                <LazyImage className="grid-item-bd" width="100%" height="100%" src={isSearch ? `${imageBase}w200/${item.poster_path}` : item.image} />
                 <div className="grid-item-bd-overlay"></div>
             </Link>
 

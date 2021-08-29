@@ -1,5 +1,6 @@
 import React from 'react'
 import { imageBase } from '../../utils/env'
+import LazyImage from './LazyImage'
 
 export default function CastItem({cast}) {
 
@@ -8,7 +9,7 @@ export default function CastItem({cast}) {
     return (
         <li className="cast-grid-item">
             <div className="cast-grid-item-i-wrapper">
-                <img className="cast-grid-item-i" data-src={cast.profile_path} src={`${imageBase}w300/${cast.profile_path}`} alt={cast.name} />
+                <LazyImage className="cast-grid-item-i" data-src={cast.profile_path} src={`${imageBase}w300/${cast.profile_path}`} alt={cast.name}/>
                 <div className="cast-grid-item-i-overlay"></div>
             </div>
 

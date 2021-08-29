@@ -35,6 +35,18 @@ html, body {
 
 }
 
+@media screen and (max-width: 1550px) {
+	.h-s-1-gap {
+		height: 40px!important;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.h-s-1-gap {
+		height: 30px!important;
+	}
+}
+
 ::-webkit-scrollbar { width: 12px; height: 10px;}
 ::-webkit-scrollbar-track {  background-color: #ffffff05;}
 ::-webkit-scrollbar-track-piece { background-color: #ffffff06;}
