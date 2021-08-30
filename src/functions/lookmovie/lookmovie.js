@@ -7,9 +7,9 @@ async function getAccessToken(config) {
     let url = '';
 
     if (config.type === 'movie') {
-        url = getCorsUrl(`https://lookmovie.com/api/v1/security/movie-access?id_movie=${config.id}&token=1&sk=&step=1`);
+        url = getCorsUrl(`https://lookmovie.site/api/v1/security/movie-access?id_movie=${config.id}&token=1&sk=&step=1`);
     } else if (config.type === 'show') {
-        url = getCorsUrl(`https://lookmovie.com/api/v1/security/show-access?slug=${config.slug}&token=&step=2`);
+        url = getCorsUrl(`https://lookmovie.site/api/v1/security/show-access?slug=${config.slug}&token=&step=2`);
     }
 
     const data = await fetch(url).then((d) => d.json());
@@ -33,7 +33,7 @@ async function findContent (config, type) {
         return;
     }
 
-    const searchUrl = getCorsUrl(`https://lookmovie.com/${type}s/search/?q=${encodeURIComponent(config.title)}`);
+    const searchUrl = getCorsUrl(`https://lookmovie.site/${type}s/search/?q=${encodeURIComponent(config.title)}`);
     let searchRes;
     try {
         searchRes = await fetch(searchUrl).then(d => d.text())
@@ -87,7 +87,7 @@ async function findContent (config, type) {
 }
 
 async function getEpisodes(slug) {
-    const url = getCorsUrl(`https://lookmovie.com/shows/view/${slug}`);
+    const url = getCorsUrl(`https://lookmovie.site/shows/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
 
     const data = JSON5.parse("{" +
@@ -116,7 +116,7 @@ async function getEpisodes(slug) {
 // Stream url
 async function getStreamUrl (slug, type, season, episode) {  // Not available yet for shows 
 
-    const url = getCorsUrl(`https://lookmovie.com/${type}s/view/${slug}`);
+    const url = getCorsUrl(`https://lookmovie.site/${type}s/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
     const data = JSON5.parse("{" +
         pageReq
@@ -167,9 +167,9 @@ async function getVideoUrl (config) {
     let url = '';
 
     if (config.type === 'movie') {
-        url = getCorsUrl(`https://lookmovie.com/manifests/movies/json/${config.id}/${now}/${accessToken}/master.m3u8`);
+        url = getCorsUrl(`https://lookmovie.site/manifests/movies/json/${config.id}/${now}/${accessToken}/master.m3u8`);
     } else if (config.type === 'show') {
-        url = getCorsUrl(`https://lookmovie.com/manifests/shows/json/${accessToken}/${now}/${config.id}/master.m3u8`);
+        url = getCorsUrl(`https://lookmovie.site/manifests/shows/json/${accessToken}/${now}/${config.id}/master.m3u8`);
     }
 
     const videoOpts = await fetch(url).then((d) => d.json());

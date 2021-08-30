@@ -18,5 +18,5 @@ export let omdbkey = "9d3d8f88"
 export let homeScrapper = "https://evening-hollows-39507.herokuapp.com/";
 
 export function getCorsUrl (url) {
-    return `https://movie-web-proxy.herokuapp.com/${url}`;
+    return `https://movie-proxy-cors.herokuapp.com/${url}`;
 }
