@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react'
 import ItemElement from "./sub-comps/ItemElement";
 import ItemPlaceholder from "./sub-comps/ItemPlaceholder";
 
-export default function GridElement({results, sort, type, resultLoading, isSearch, inView, ref}) {
-    console.log(inView, ref)
+export default function GridElement({results, sort, type, resultLoading, isSearch}) {
     const [loaded, setLoaded] = useState(false);
 
     const stuffLoaded = () => {
@@ -15,12 +14,8 @@ export default function GridElement({results, sort, type, resultLoading, isSearc
         }, 700)
     }
 
-    if (!inView) {
-        <div></div>
-    }
-
     return (
-        <div ref={ref} className="grid-o-wrapper" style={{justifyContent: isSearch ? "flex-start" : "center"}}>
+        <div className="grid-o-wrapper" style={{justifyContent: isSearch ? "flex-start" : "center"}}>
             {resultLoading ? "" : stuffLoaded()}
             <div className="grid-content-wrapper">
                 {!isSearch && (

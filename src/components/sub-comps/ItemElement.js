@@ -23,7 +23,7 @@ export default function ItemElement({slug, item, type, isSearch}) {
     return (
         <li data-id={slug} key={slug} id={slug} className="grid-item-t1">
             
-            <Link style={{textDecoration: "none"}} to={`/${type}/${slug}/${encodeURIComponent(name)}${type === "movie" ? `/${isSearch ? year : item.year}` : ""}`} className="grid-item-t1-bd-wrapper">
+            <Link style={{textDecoration: "none"}} to={`/${type}/${slug}/${encodeURIComponent(name)}${type === "movie" ? `/${isSearch ? year : type === "movie" ? item.year : ""}` : ""}`} className="grid-item-t1-bd-wrapper">
                 <LazyImage className="grid-item-bd" width="100%" height="100%" src={isSearch ? `${imageBase}w200/${item.poster_path}` : item.image} />
                 <div className="grid-item-bd-overlay"></div>
             </Link>
@@ -47,14 +47,14 @@ export default function ItemElement({slug, item, type, isSearch}) {
                 </div>
                 
                 <div className="t1-col2">
-                    <Link to={`/${type}/${slug}/${encodeURIComponent(name)}/${isSearch ? year : item.year}`} style={{textDecoration: "none"}} className="t1-col2-name">
+                    <Link to={`/${type}/${slug}/${encodeURIComponent(name)}/${isSearch ? year : type === "movie" ? item.year : ""}`} style={{textDecoration: "none"}} className="t1-col2-name">
                         <span className="t1-col2-name-text">{(name.split("").length > 28 ? name.slice(0, 26) + " ..." : name)}</span>
                     </Link>
                 </div>
 
                 <div className="t1-col3">
                     <div className="t1-col3-btn-wrapper">
-                        <Link style={{textDecoration: "none"}} to={`/${type}/${slug}/${encodeURIComponent(name)}/${isSearch ? year : item.year}`}>
+                        <Link style={{textDecoration: "none"}} to={`/${type}/${slug}/${encodeURIComponent(name)}/${isSearch ? year : type === "movie" ? item.year : ""}`}>
                             <button id="t1-col3-btn2" className="t1-col3-btn">
                                 <span className="t1-col3-btn-text">Preview</span>
                             </button>

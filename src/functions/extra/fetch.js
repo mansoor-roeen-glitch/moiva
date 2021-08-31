@@ -19,7 +19,6 @@ export function getcredits (id, apkey, type) {
 }
 
 export function getseasondetails (id, apkey, seasonNumber) {
-    console.log(id, apkey, seasonNumber)
     return fetch(`http://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${apkey}`)
     .then(res => res.json().then(data => { return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}}))
 }

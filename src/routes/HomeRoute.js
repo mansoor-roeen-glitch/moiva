@@ -22,8 +22,6 @@ export default function HomeRoute(props) {
         .then(res => res.json())
         .catch(error => error)
 
-      console.log(result)
-
       if (result.success === false || !result.statuscode === 200) {
         setResultError(result);
         setResultLoading(false);
