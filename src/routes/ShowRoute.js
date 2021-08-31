@@ -35,9 +35,8 @@ export default function ShowRoute (props) {
     let response;
 
     useEffect( async() => {
-                let pathnames = window.location.pathname.split("/");
-
-        let query = decodeURIComponent(pathnames[pathnames.length - 1]);
+        let pathnames = window.location.pathname.split("/");
+        let query = decodeURIComponent(pathnames[pathnames.length - 2]);
         let type = pathnames[1];
         let tmdbType = "tv";
 
@@ -49,8 +48,7 @@ export default function ShowRoute (props) {
         }
 
         let themoviesdbResponse = await getitem(query.replace(/\(\)/, ""), tmdbend, tmdbkey, "TMDB", tmdbType);
-
-        if (themoviesdbResponse.statuscode !== 200 ||  themoviesdbResponse.tmdbSuccess !== true || !themoviesdbResponse.res.results) {
+        if (themoviesdbResponse.statuscode !== 200 ||  themoviesdbResponse.tmdbSuccess !== true || !themoviesdbResponse.res.results.length > 0) {
             error = themoviesdbResponse;
         } else {
 
