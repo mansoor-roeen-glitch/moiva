@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { tmdbkey, tmdbend, imageBase} from '../utils/env';
-import {getbyid, getitem, getcredits} from '../functions/extra/fetch';
+import {fetchData} from '../functions/extra/fetch';
 import {findContent, getStreamUrl} from '../functions/lookmovie/index';
 import VideoElement from '../components/VideoElement';
 import errorHandler from '../functions/extra/errorhandler';
@@ -9,6 +8,7 @@ import CastWrapper from '../components/CastWrapper';
 import '../components/styles/movieRouteStyles.css'
 import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/loader.css"
+import { imageBase } from '../utils/env';
 
 export default function MovieRoute (props) {
 
@@ -28,49 +28,25 @@ export default function MovieRoute (props) {
     useEffect( async () => {
 
         let pathnames = window.location.pathname.split("/");
-
-        let query = decodeURIComponent(pathnames[pathnames.length - 2]);
-        let year = pathnames[pathnames.length - 1];
-        let type = pathnames[1];
-
-        let results = [];
+        let tmdbId = decodeURIComponent(pathnames[pathnames.length - 2]);
+        let tmdbType = "movie";
         let error = false;
 
-        if (!query || !type || !year) {
+        if (!tmdbType || !tmdbId) {
             return; // Error handler
         }
 
-        let themoviesdbResponse = await getitem(query.replace(/\(\)/, ""), tmdbend, tmdbkey, "TMDB", type);
-        if (themoviesdbResponse.statuscode === 200 && themoviesdbResponse.tmdbSuccess === true ) {
-            results = themoviesdbResponse.res.results.filter((result) => result.release_date?.split("-")[0] === year )
-            if (results) {
-                results = await getbyid(results[0].id, tmdbkey, "movie")
-            } else {
-                error = themoviesdbResponse
-            }
-            
-        } else {
-            error = themoviesdbResponse
-        }
+        let results = await fetchData("get-by-id", {id: tmdbId, type: tmdbType});
 
-        if (error || results.length < 1) {
+        if (!results || !results.success) {
             return;
-        } else {
+        } 
 
-            let credits = await getcredits(results.res.id, tmdbkey, "movie")
-
-            if (credits.tmdbSuccess === true) {
-                results.res.cast = credits.res.cast
-                results.res.crew = credits.res.crew
-            }
-
-        }
-
-        setResult(results.res)
+        setResult(results.responsedata)
         setLoading(false)
         setStreaminfoloading(true)
         
-        let matched = await getStreamInfo(query, type, year)
+        let matched = await getStreamInfo(encodeURI(results.responsedata.title), tmdbType, results.responsedata.release_date.split("-")[0]);
         
         if (!matched) {
             setStreaminfoerror("Stream data not found")
@@ -234,8 +210,8 @@ export default function MovieRoute (props) {
                     </div>
                 </div>
                 
-                {result.cast && (
-                    <CastWrapper castList={result.cast} />
+                {result.credits && (
+                    <CastWrapper castList={result.credits.cast} />
                 )}
                 {result.images && result.videos && (
                     <MediaWrapper images={{backdrops: result.images.backdrops.slice(0, 7), posters: result.images.posters.slice(0, 7)}} videos={result.videos.results.slice(0, 5)} />

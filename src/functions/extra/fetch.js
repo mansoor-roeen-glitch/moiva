@@ -1,24 +1,35 @@
-export function getitem (query, apend, apkey, source, type) {
-    return fetch(`${apend}search/${type}?query=${query}&api_key=${apkey}`)
-    .then(res => res.json()).then(data => {return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 404, tmdbSuccess: false}})
-}
+import { base_url } from "../../utils/env"
+export function fetchData (link, {...extra}) {
+    switch (link) {
 
-export function searchitem (query, apend, apkey, source) {
-    return fetch(`${apend}search/multi?query=${encodeURIComponent(query)}&api_key=${apkey}`)
-    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
-}
+        case "get-season-details":
+            link = `${base_url}/get-season-details/${extra.id}/${extra.seasonNumber}`;
+            break;
+        case "get-credits":
+            link = `${base_url}/get-credits/${extra.type}/${extra.id}`;
+            break;
+        case "get-by-id":
+            link = `${base_url}/get-by-id/${extra.type}/${extra.id}`;
+            break;
+        case "get-search":
+            link = `${base_url}/get-search/${extra.query}`;
+            break;
+        case "get-images":
+            link = `${base_url}/get-images/${extra.type}/${extra.id}`;
+            break;
+        case "get-videos":
+            link = `${base_url}/get-videos/${extra.type}/${extra.id}`;
+            break;            
+        default:
+            link = "";
+            break;
+    }
 
-export function getbyid (id, apkey, type, apc) {
-    return fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=${apkey}&append_to_response=videos,images${apc ? ",credits" : ""}`)
-    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: data.length > 0 ? true : false}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
-}
+    if (!link) {
+        return {success: false, statuscode: 402, error: "invalid request"};
+    }
 
-export function getcredits (id, apkey, type) {
-    return fetch(`https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apkey}`)
-    .then(res => res.json()).then(data => { return {res: data, statuscode: 200, tmdbSuccess: data.cast ? true : false}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}})
-}
+    return fetch(link)
+    .then(res => res.json()).then(data => data).catch(err => err)
 
-export function getseasondetails (id, apkey, seasonNumber) {
-    return fetch(`http://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}?api_key=${apkey}`)
-    .then(res => res.json().then(data => { return {res: data, statuscode: 200, tmdbSuccess: true}}).catch(err => {return {res: err, statuscode: 500, tmdbSuccess: false}}))
 }

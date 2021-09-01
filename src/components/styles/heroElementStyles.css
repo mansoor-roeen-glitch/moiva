@@ -11,7 +11,7 @@
 }
 
 .hero-content-wrapper {
-    width: 92%;
+    width: 94%;
     max-width: 1500px;
 
     display: flex;
@@ -90,37 +90,48 @@
 
 @media screen and (max-width: 1350px) {
     .hero-content-h {
-        font-size: 35px;
+        font-size: calc(40px * 0.9);
     }
 
     .hero-content-p {
-        font-size: 22px;
+        font-size: calc(26px * 0.9);
     }
 }
 
 @media screen and (max-width: 1142px) {
     .hero-content-h {
-        font-size: 32px;
+        font-size: calc(40px * 0.8);
     }
 
     .hero-content-p {
-        font-size: 22px;
+        font-size: calc(26px * 0.8);
     }
 }
 
 @media screen and (max-width: 708px) {
     .hero-content-h {
-        font-size: 28px;
+        font-size: calc(40px * 0.7);
     }
 
     .hero-content-p {
-        font-size: 18px;
+        font-size: calc(26px * 0.7);
     }
 
-}
-
-@media screen and (max-width: 643px) {
     .hero-content-wrapper {
-        padding-top: 40px;
+        padding-top: 0px;
+        margin-top: -5px;
     }
+
+    .hero-o-wrapper {
+        height: 320px;
+    }
+
+    .hero-bg-wrapper {
+        height: 320px;
+    }
+
+    .hero-content-bg {
+        height: 320px;
+    }
+
 }

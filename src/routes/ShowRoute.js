@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { imageBase, tmdbend, tmdbkey } from '../utils/env';
-import {getbyid, getitem, getseasondetails} from '../functions/extra/fetch';
+import React, {useState, useEffect, useRef} from 'react';
+import { imageBase } from '../utils/env';
 import {findContent, getStreamUrl, findEpisodes} from '../functions/lookmovie/index';
 import VideoElement from '../components/VideoElement';
 import { stringify } from 'json5';
@@ -10,6 +9,8 @@ import CastWrapper from '../components/CastWrapper';
 import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/tvRouteStyles.css"
 import "../components/styles/loader.css"
+import { fetchData } from '../functions/extra/fetch';
+import { useOnScreen } from '../functions/extra/useOnScreen';
 
 export default function ShowRoute (props) {
     
@@ -35,44 +36,40 @@ export default function ShowRoute (props) {
     let response;
 
     useEffect( async() => {
+
         let pathnames = window.location.pathname.split("/");
-        let query = decodeURIComponent(pathnames[pathnames.length - 2]);
+        let tmdbId = decodeURIComponent(pathnames[pathnames.length - 2]);
         let type = pathnames[1];
         let tmdbType = "tv";
 
         let results = [];
         let error = false;
 
-        if (!query || !type) {
+        if (!tmdbId || !type) {
             return; // Error handler
         }
 
-        let themoviesdbResponse = await getitem(query.replace(/\(\)/, ""), tmdbend, tmdbkey, "TMDB", tmdbType);
-        if (themoviesdbResponse.statuscode !== 200 ||  themoviesdbResponse.tmdbSuccess !== true || !themoviesdbResponse.res.results.length > 0) {
-            error = themoviesdbResponse;
-        } else {
-
-            let res = await getbyid(themoviesdbResponse.res.results[0].id, tmdbkey, "tv", true);    
-
-            if (res.statuscode === 200 && res.res) {
-                results = res.res
-            }
-            
+        let res = await fetchData("get-by-id", {id: tmdbId, type: tmdbType, isCast: true});   
+        console.log(res)
+        if (res.statuscode === 200 && res.responsedata) {
+            results = res.responsedata;
         }
-
-        let seasonDetails = await getSeasonDetails(results.id, selectedSe)
+            
+        let seasonDetails = await fetchData("get-season-details", {id: results.id, seasonNumber: selectedSe})
         if (error || !results || !seasonDetails) {
             return;
-        } 
+        }
+        
+        console.log(seasonDetails)
 
         setResult(results)
-        setSDetails(seasonDetails)
+        setSDetails(seasonDetails.responsedata)
         setLoading(false)
         setSLoading(false)
 
-        getStreamInfo(query, type, results.first_air_date)
+        getStreamInfo(encodeURI(results.name), type, results.first_air_date)
 
-    }, [findContent])
+    }, [])
 
     async function getStreamInfo (title, type, year) {
 
@@ -111,7 +108,7 @@ export default function ShowRoute (props) {
     }
     
     async function getSeasonDetails (id, seasonNumber) {
-        let seasonDetails = await getseasondetails(id, tmdbkey, seasonNumber + 1);
+        let seasonDetails = await fetchData("get-season-details", {id: id, seasonNumber});
         if (!seasonDetails.res || !seasonDetails.res.episodes || !seasonDetails.tmdbSuccess) {
             return "error"
         }
@@ -145,8 +142,10 @@ export default function ShowRoute (props) {
     }
 
     const handleSeasonSelect = async (index) => {
+        console.log(index)
         if (sDetails.season_number !== index) {
-            setSDetails(await getSeasonDetails(result.id, index -1))
+            let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index -1})
+            setSDetails(seasonDetails.responsedata)
             setSelectedSe(index -1)
         }
     }
@@ -176,7 +175,9 @@ export default function ShowRoute (props) {
                 <div className="tv-player-wrapper">
                     <VideoElement streamType="episode" streamLoading={streamloading} streamOptions={streamOptions} />
                 </div>
-            )}
+            )}  
+
+            {console.log(sDetails)}
 
             {clicked && sDetails && !sLoading && episodes && (
                 <div className="tv-e-details">
@@ -294,12 +295,23 @@ export default function ShowRoute (props) {
                     </div>
                 </div>
                 
-                {result.credits.cast && (
-                    <CastWrapper castList={result.credits.cast} />
-                )}
-                {result.images && result.videos && (
-                    <MediaWrapper images={{backdrops: result.images.backdrops.slice(0, 7), posters: result.images.posters.slice(0, 7)}} videos={result.videos.results.slice(0, 5)} />
-                )}
+                <div className="cast-outer-container">
+                    {!result || !result.credits && (
+                        <div className="cast-container-placeholder">some content here</div>
+                    )} 
+                    {result && result.credits && (
+                        <CastWrapper castList={result.credits.cast} />
+                    )}
+                </div>
+
+                <div className="images-outer-container">
+                    {!result || !result.images || !result.videos && (
+                        <div className="images-container-placeholder">some content here</div>
+                    )}
+                    {result && result.images && result.videos && (
+                        <MediaWrapper images={{backdrops: result.images.backdrops.slice(0, 7), posters: result.images.posters.slice(0, 7)}} videos={result.videos.results.slice(0, 5)} />
+                    )}
+                </div>
                 
             </div>
         </div>

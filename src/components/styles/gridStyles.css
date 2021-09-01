@@ -6,12 +6,11 @@
     align-items: center;
     justify-content: center;
 
-    background: var(--main-bg);
     position: relative;
 }
 
 .grid-content-wrapper {
-    width: 92%;
+    width: 94%;
     max-width: 1500px;
     align-self: center;
 

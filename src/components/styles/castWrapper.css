@@ -2,7 +2,6 @@
     width: 100%;
     height: fit-content;
 
-    background-color: var(--main-bg);
     display: flex;
     flex-direction: column;
     padding-top: 40px;

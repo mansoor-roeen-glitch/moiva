@@ -81,13 +81,25 @@
 
 @media screen and (max-width: 600px) {
     .h-searchbar-wrapper {
-        width: 270px;
+        width: 250px;
+        height: 34px!important;
+        border-radius: 4px;
+    }
+
+    #h-s-icon {
+        width: 19px;
+        height: 19px;
+    }
+
+    .h-s-icon-wrapper {
+        width: 20px;
+        height: 20px;
     }
 }
 
 @media screen and (max-width: 450px) {
     .h-searchbar-wrapper {
-        width: 200px;
+        width: 190px;
     }
 
     #h-s-icon {

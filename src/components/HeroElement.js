@@ -5,7 +5,7 @@ export default function HeroElement({screenSize, forSearch}) {
     return (
         <div className="hero-o-wrapper" style={{height: forSearch ? "200px" : "350px"}}>
             
-            <div className="hero-bg-wrapper" style={{height: forSearch ? "200px" : "350px"}}>
+        <div className="hero-bg-wrapper" style={{height: forSearch ? "200px" : "350px"}}>
                     <img className="hero-content-bg" src="/static/images/hero-backdrop.jpg" alt="Hero Element Backdrop" />
                     <div className="hero-content-overlay"></div>
                 </div>

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import GridElement from '../components/GridElement'
 import HeaderElement from '../components/HeaderElement'
-import { searchitem } from '../functions/extra/fetch'
-import { tmdbend, tmdbkey } from '../utils/env'
+import { fetchData, searchitem } from '../functions/extra/fetch'
 import '../components/styles/searchRoute.css'
 
 export default function SearchRoute(props) {
@@ -19,10 +18,9 @@ export default function SearchRoute(props) {
         const query = pathnames[pathnames.length - 1] 
         setSearchTerm(query)
 
-        let res = await searchitem(query.replaceAll("%20", "+"), tmdbend, tmdbkey, "TMDB");
-        
-        if (res.tmdbSuccess) {
-            setResults(res.res.results)
+        let res = await fetchData("get-search", {query: query.replaceAll("%20", "+")});
+        if (res.success) {
+            setResults(res.responsedata.results)
             setLoading(false)
         } else {
             setError(res)
@@ -45,7 +43,9 @@ export default function SearchRoute(props) {
 
                 <div className="search-r-o-inner">
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "55px"}}></div>
-                    <GridElement isSearch={true} results={results} resultLoading={loading} sort="Search Results" />
+                    {!loading && !error && (
+                        <GridElement isSearch={true} results={results} resultLoading={loading} sort="Search Results" />
+                    )}
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "70px"}}></div>
                 </div>
             </div>

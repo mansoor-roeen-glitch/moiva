@@ -21,7 +21,7 @@
     background: transparent;
     height: auto;
     
-    width: 92%;
+    width: 94%;
     max-width: 1500px;
 
     display: flex;
@@ -308,4 +308,23 @@
         height: 36px!important;
     }
     
+}
+
+@media screen and (max-width: 600px) {
+    .h-i-hamb-line {
+        height: 1px;
+        width: 95%;
+    }
+    #h-i-hamb-label {
+        height: 23px;
+        width: 35px;
+    }
+
+    .h-searchbar-wrapper {
+        margin-right: 20px;
+    }
+
+    .header-outer-wrapper {
+        height: 61px;
+    }
 }

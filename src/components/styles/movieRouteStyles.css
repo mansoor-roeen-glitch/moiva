@@ -42,7 +42,7 @@
 }
 
 .movie-r-inner {
-    width: 92%;
+    width: 94%;
     max-width: 1500px;
 
     background: transparent;
@@ -228,7 +228,7 @@
     margin-top: 15px;
     margin-bottom: 20px;
     height: fit-content;
-    width: 92%;
+    width: 94%;
     max-width: 1100px;
 }
 
@@ -278,13 +278,13 @@
 .movie-player-wrapper {
     z-index: 2;
     margin-top: 90px;
-    width: 92%;
+    width: 94%;
     max-width: 1500px;
     position: relative;
     height: fit-content;
 
     min-height: 35vw;
-    height: fit-contents;
+    height: fit-content;
     max-height: 48vw;
     background: #102241;
 
@@ -461,4 +461,15 @@
         margin-right: 40px;
     }
 
+}
+
+@media screen and (max-width: 600px) {
+    .movie-player-wrapper {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .movie-info-sec-wrapper.p-less {
+        padding-top: 17px!important;
+    }
 }
