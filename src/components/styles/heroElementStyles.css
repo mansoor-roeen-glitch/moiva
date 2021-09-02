@@ -109,6 +109,11 @@
 }
 
 @media screen and (max-width: 708px) {
+
+    .hero-content-gap {
+        height: 10px!important;
+    }
+
     .hero-content-h {
         font-size: calc(40px * 0.65);
     }

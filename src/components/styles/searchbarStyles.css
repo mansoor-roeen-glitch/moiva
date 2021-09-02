@@ -98,9 +98,9 @@
 }
 
 @media screen and (max-width: 450px) {
-    /* .h-searchbar-wrapper {
-        width: 190px;
-    } */
+    .h-searchbar-wrapper {
+        width: 230px;
+    }
 
     #h-s-icon {
         width: 20px;

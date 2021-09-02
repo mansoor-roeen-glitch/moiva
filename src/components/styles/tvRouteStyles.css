@@ -116,6 +116,7 @@
 .tv-info-sec-details-col2-row2 {
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-bottom: 30px;
 }
 
@@ -636,5 +637,38 @@
 
         background: #000000;
         min-height: 50vw;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .tv-info-tagline {
+        font-size: calc(18px * 0.95)
+    }
+
+    .tv-info-sec-details-col2-row1-header {
+        font-size: calc(24px * 0.9);
+    }
+
+    .tv-info-details-c2-r2-c2-item-text, .tv-info-sec-details-col2-row2-col1-text {
+        font-size: calc(14.4px * 0.95);
+    }
+
+    .cast-header {
+        font-size: calc(24px * 0.8);
+    }
+
+    #m-i-s-btn1 {
+
+        height: calc(40px * 0.9);
+        width: 130px;
+
+    }
+
+    .media-checkbox-text {
+        font-size: calc(19px * 0.8);
+    }
+
+    .media-wrapper-header {
+        font-size: calc(24px * 0.8);
     }
 }
