@@ -480,6 +480,40 @@
         min-height: 50vw;
         background: #000000;
     }
+
+    .tv-e-details-header-text, .tv-e-details-header-text span {
+        font-size: calc(22px * 0.85);
+    }
+
+    .tv-e-details-header-date {
+        font-size: calc(18px * 0.85);
+    }
+
+    .tv-e-s-btn {
+        font-size: calc(16px * 0.95);
+        
+    }
+
+    .tv-e-btn-svg {
+        width: 18px;
+        height: 18px;
+        top: 12px;
+        left: 11px;
+    }
+
+    .tv-e-details-header-s-wrapper {
+        width: 120px;
+    }
+
+    .tv-e-s-btn-wrapper {
+        height: 40px;
+        padding-left: 26px;
+        background: #0a265a;
+    }
+    
+    .tv-e-details-header {
+        align-items: flex-start;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -495,7 +529,7 @@
         font-size: calc(24px * 0.8);
     }
 
-    .movie-info-sec-details-col-98-row1-header{
+    .movie-info-sec-details-col2-row1-header{
         font-size: calc(24px * 0.9);
     }   
 
@@ -507,5 +541,89 @@
         height: calc(40px * 0.9);
         width: 130px;
 
+    }
+
+    .movie-info-tagline {
+        font-size: calc(18px * 0.95);
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .tv-e-details-header-date {
+        font-size: calc(18px * 0.75);
+    }
+
+    .tv-e-details-header-text, .tv-e-details-header-text span  {
+        font-size: calc(22px * 0.77);
+    }
+
+    .movie-info-sec-details-col2-row1-header {
+        font-size: calc(24 * 0.8);
+    }
+
+    .movie-info-tagline {
+        font-size: calc(18px * 0.9);
+    }
+
+    .movie-info-sec-btn-text {
+        font-size: calc(18px * 0.8);
+    }
+
+    #m-i-s-btn1 {
+        width: 105px;
+        height: 32px;
+    }
+
+    .movie-info-sec-btn svg {
+        width: calc(22px * 0.8);
+        height: calc(21px * 0.8);
+    }
+
+    .movie-info-overview-header {
+        font-size: calc(20px * 0.85);
+    }
+
+    .movie-info-overview-text {
+        font-size: calc(16px * 0.85);
+    }
+
+    .movie-info-sec-details-col102-row3 {
+        margin-bottom: 0px;
+    }
+
+    .cast-header {
+        font-size: calc(24px * 0.7);
+    }
+
+    .media-wrapper-header {
+        font-size: calc(24px * 0.7);
+    }
+
+    .media-checkbox-text {
+        font-size: calc(19px * 0.7);
+    }
+
+    .media-wrapper-h-t-wrapper {
+        margin-right: 20px;
+    }
+
+    .media-w-h-c-wrapper {
+        grid-gap: 15px;
+        gap: 15px;
+    }
+
+}
+
+@media screen and (max-width: 430px) {
+    .tv-info-sec-details-col2-row2 {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 0px;
+    }
+
+    .tv-info-sec-details-col2-row2-col1-text {
+        border: none;
+        padding: 0px;
     }
 }

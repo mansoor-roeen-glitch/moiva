@@ -672,3 +672,60 @@
         font-size: calc(24px * 0.8);
     }
 }
+
+@media screen and (max-width: 400px) {
+    .tv-info-sec-details-col2-row1-header {
+        font-size: calc(24 * 0.8);
+    }
+
+    .tv-info-tagline {
+        font-size: calc(18px * 0.9);
+    }
+
+    .tv-info-sec-btn-text {
+        font-size: calc(18px * 0.8);
+    }
+
+    #m-i-s-btn1 {
+        width: 105px;
+        height: 32px;
+    }
+
+    .tv-info-sec-btn svg {
+        width: calc(22px * 0.8);
+        height: calc(21px * 0.8);
+    }
+
+    .tv-info-overview-header {
+        font-size: calc(20px * 0.85);
+    }
+
+    .tv-info-overview-text {
+        font-size: calc(16px * 0.85);
+    }
+
+    .tv-info-sec-details-col102-row3 {
+        margin-bottom: 0px;
+    }
+
+    .cast-header {
+        font-size: calc(24px * 0.7);
+    }
+
+    .media-wrapper-header {
+        font-size: calc(24px * 0.7);
+    }
+
+    .media-checkbox-text {
+        font-size: calc(19px * 0.7);
+    }
+
+    .media-wrapper-h-t-wrapper {
+        margin-right: 20px;
+    }
+
+    .media-w-h-c-wrapper {
+        grid-gap: 15px;
+        gap: 15px;
+    }
+}
