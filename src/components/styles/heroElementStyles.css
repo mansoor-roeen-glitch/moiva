@@ -110,28 +110,27 @@
 
 @media screen and (max-width: 708px) {
     .hero-content-h {
-        font-size: calc(40px * 0.7);
+        font-size: calc(40px * 0.65);
     }
 
     .hero-content-p {
-        font-size: calc(26px * 0.7);
+        font-size: calc(26px * 0.65);
     }
 
-    .hero-content-wrapper {
-        padding-top: 0px;
-        margin-top: -5px;
+    .hero-content {
+        padding: 0px;
     }
 
     .hero-o-wrapper {
-        height: 320px;
+        height: 300px;
     }
 
     .hero-bg-wrapper {
-        height: 320px;
+        height: 300px;
     }
 
     .hero-content-bg {
-        height: 320px;
+        height: 300px;
     }
 
 }

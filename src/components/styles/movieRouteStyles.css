@@ -466,10 +466,9 @@
 @media screen and (max-width: 600px) {
     .movie-player-wrapper {
         width: 100%;
-        justify-content: flex-end;
-    }
+        margin-top: 57px;
 
-    .movie-info-sec-wrapper.p-less {
-        padding-top: 17px!important;
+        min-height: 50vw;
+        background: #000000;
     }
 }

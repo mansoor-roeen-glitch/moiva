@@ -34,7 +34,7 @@ export default function HeaderElement({screenSize, handleHambClick, isSearch}) {
                     </a>
                 </div>
             
-            {screenSize.screenWidth > 940 ? (
+            {/* {screenSize.screenWidth > 940 ? (
                 <div className="h-i-middle-wrapper">
                     <nav className="h-i-navbar">
                         <ul className="navbar-item-wrapper">
@@ -58,12 +58,12 @@ export default function HeaderElement({screenSize, handleHambClick, isSearch}) {
                         </ul>
                     </nav>
                 </div>
-            ) : ""}
+            ) : ""} */}
 
             
             <div className="h-i-right-wrapper">
                 <SearchElement />
-                {screenSize.screenWidth <= 940 &&
+                {/* {screenSize.screenWidth <= 940 &&
                     (<div className="h-i-hamb-wrapper" onClick={handleHambClick}>
                         <input type="checkbox"id="h-i-hamb-checkbox" name="h-i-hamb" />
                         <label id="h-i-hamb-label" className="h-i-hamb-label" htmlFor="h-i-hamb">
@@ -71,7 +71,7 @@ export default function HeaderElement({screenSize, handleHambClick, isSearch}) {
                             <span className="h-i-hamb-line" id="h-i-hamb-link-2"></span>
                             <span className="h-i-hamb-line" id="h-i-hamb-link-3"></span>
                         </label>
-                    </div>)} 
+                    </div>)}  */}
             </div>
 
             </div>

@@ -481,6 +481,10 @@
     align-items: center;
     justify-content: center;
     position: relative;
+
+    width: 200px;
+    height: 113px;
+    background: var(--i-btn-bg);
 }
 
 .tv-e-select-i-bg{
@@ -628,6 +632,9 @@
 @media screen and (max-width: 600px) {
     .tv-player-wrapper {
         width: 100%;
-        margin-top: 62px;
+        margin-top: 57px;
+
+        background: #000000;
+        min-height: 50vw;
     }
 }

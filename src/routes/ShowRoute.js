@@ -14,8 +14,8 @@ import { useOnScreen } from '../functions/extra/useOnScreen';
 
 export default function ShowRoute (props) {
     
-    const [selectedEp, setSelectedEp] = useState(0);
-    const [selectedSe, setSelectedSe] = useState(0);
+    const [selectedEp, setSelectedEp] = useState(1);
+    const [selectedSe, setSelectedSe] = useState(1);
     const [data, setData] = useState();
     const [result, setResult] = useState();
     const [episodes, setEpisodes] = useState();
@@ -84,6 +84,7 @@ export default function ShowRoute (props) {
             return;
         }  
 
+        console.log(title, type, year)
         response = await findContent(title, year.split("-")[0], type)
         
         if (!response.success) {
@@ -131,7 +132,6 @@ export default function ShowRoute (props) {
 
         setStreamLoading(true)
         let streamUrlResponse = await getStreamUrl({slug: data.slug, type: data.type, source: data.source, season: JSON.stringify(selectedSe + 1), episode: JSON.stringify(episode  + 1)})
-        
         if (!streamUrlResponse.success) {
             
             setStreamError(streamUrlResponse);

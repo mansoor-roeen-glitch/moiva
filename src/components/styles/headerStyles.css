@@ -302,15 +302,15 @@
         width: 37px;
         height: 37px;
     }
-
-    .h-searchbar-wrapper {
-        margin-right: 30px;
-        height: 36px!important;
-    }
     
 }
 
 @media screen and (max-width: 600px) {
+    .h-searchbar-wrapper {
+        margin-right: 0px!important;
+        height: 35px!important;
+    }
+    
     .h-i-hamb-line {
         height: 1px;
         width: 95%;
@@ -325,6 +325,6 @@
     }
 
     .header-outer-wrapper {
-        height: 61px;
+        height: 57px!important;
     }
 }

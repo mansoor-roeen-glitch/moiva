@@ -243,6 +243,11 @@
 
 @media screen and (max-width: 708px) {
     .g-c-header-heading {
-        font-size: calc(30px * 0.8)!important;
+        font-size: calc(30px * 0.7)!important;
+    }
+
+    .h-s-1-gap {
+        display: none;
+        height: 0px!important;
     }
 }
