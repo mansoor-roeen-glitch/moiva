@@ -115,11 +115,11 @@
     }
 
     .hero-content-h {
-        font-size: calc(40px * 0.65);
+        font-size: calc(40px * 0.6);
     }
 
     .hero-content-p {
-        font-size: calc(26px * 0.65);
+        font-size: calc(26px * 0.6);
     }
 
     .hero-content {

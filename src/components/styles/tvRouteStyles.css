@@ -382,7 +382,7 @@
     width: 100%;
     height: 48px;
     position: relative;
-    background: #142542;
+    background: #0f1e3b!important;
     padding-left: 35px;
     cursor: pointer;
     z-index: 2;
@@ -641,6 +641,19 @@
 }
 
 @media screen and (max-width: 500px) {
+
+    .tv-e-details {
+        margin-top: 15px;
+    }
+
+    .tv-e-details-wrapper {
+        margin-bottom: -20px;
+    }
+
+    .tv-e-details-header {
+        margin-bottom: 0px!important;
+    }
+
     .tv-info-tagline {
         font-size: calc(18px * 0.95)
     }

@@ -481,6 +481,10 @@
         background: #000000;
     }
 
+    .movie-info-sec-wrapper.p-less {
+        padding-top: 25px!important;
+    }
+
     .tv-e-details-header-text, .tv-e-details-header-text span {
         font-size: calc(22px * 0.85);
     }

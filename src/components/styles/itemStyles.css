@@ -109,6 +109,9 @@
 .t1-col1-year {
     width: fit-content;
     position: relative;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .t1-col1-year-text {
@@ -169,4 +172,28 @@
 #t1-col3-btn2 span {
     color: var(--main-white);
     opacity: .9;
+}
+
+@media screen and (max-width: 610px) {
+    .t1-col2-name-text {
+        display: inline-block;
+        font-size: calc(16px * 0.9);
+        line-height: 19px;
+        margin-top: 4px;
+    }
+
+    .t1-col1-year-text {
+        font-size: calc(16px * 0.9);
+        font-weight: 300;
+    }
+
+    .t1-col1-text {
+        font-size: calc(16px * 0.9);
+        text-align: center;
+    }
+
+    #t1-col1-rating-svg {
+        height: 14.4px;
+        width: 14.4px;
+    }
 }
