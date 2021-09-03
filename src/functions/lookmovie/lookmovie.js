@@ -136,7 +136,6 @@ async function getStreamUrl (slug, type, season, episode) {  // Not available ye
         if (episodeObj) {
             id = episodeObj.id_episode;
         }
-        console.log(episodeObj)
     }
 
     if (id === '') {

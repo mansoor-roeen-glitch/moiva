@@ -50,7 +50,6 @@ export default function ShowRoute (props) {
         }
 
         let res = await fetchData("get-by-id", {id: tmdbId, type: tmdbType, isCast: true});   
-        console.log(res)
         if (res.statuscode === 200 && res.responsedata) {
             results = res.responsedata;
         }
@@ -60,7 +59,6 @@ export default function ShowRoute (props) {
             return;
         }
         
-        console.log(seasonDetails)
 
         setResult(results)
         setSDetails(seasonDetails.responsedata)
@@ -84,7 +82,6 @@ export default function ShowRoute (props) {
             return;
         }  
 
-        console.log(title, type, year)
         response = await findContent(title, year.split("-")[0], type)
         
         if (!response.success) {
@@ -142,7 +139,6 @@ export default function ShowRoute (props) {
     }
 
     const handleSeasonSelect = async (index) => {
-        console.log(index)
         if (sDetails.season_number !== index) {
             let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index -1})
             setSDetails(seasonDetails.responsedata)
@@ -177,7 +173,6 @@ export default function ShowRoute (props) {
                 </div>
             )}  
 
-            {console.log(sDetails)}
 
             {clicked && sDetails && !sLoading && episodes && (
                 <div className="tv-e-details">

@@ -91,11 +91,16 @@
 .cast-grid-item-details-rname-text {
     font-size: 16px;
     font-weight: 400;
+    display: inline-block;
     color: var(--main-white);
+    line-height: 18px;
     display: block;
 }
 
 .cast-grid-item-details-cname-text {
+    display: inline-block;
+    line-height: 18px;
+
     font-size: 16px;
     font-weight: 300;
     color: var(--fr-white);

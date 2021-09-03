@@ -225,6 +225,31 @@
     .grid-item-t1-bd-wrapper {
         height: calc(242px * 0.88)!important;
     }
+
+    .media-grid-item-i-w {
+        height: calc(260px * 0.6)!important;
+    }
+
+    .media-grid-item-i {
+        height: calc(260px * 0.6)!important;
+    }
+
+    .media-grid-item {
+        height: calc(260px * 0.6)!important;
+    }
+
+    .media-grid-item-v-w {
+        width: calc(470px * 0.6);
+    }
+
+    .media-grid-item-i-v {
+        width: calc(500px * 0.6);
+        height: calc(290px * 0.6);
+    }
+
+    .media-grid {
+        padding-bottom: 10px;
+    }
 }
 
 @media screen and (max-width: 435px) {
