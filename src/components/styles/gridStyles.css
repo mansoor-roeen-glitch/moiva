@@ -252,6 +252,16 @@
     }
 }
 
+.loadingGridContent {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    z-index: 2;
+    background: var(--main-bg);
+    opacity: .5;
+}
+
 @media screen and (max-width: 435px) {
 
     .grid-item-t1 {

@@ -44,13 +44,13 @@ export default function MediaWrapper({images, videos}) {
                         {checkedBox === "2" ? images.backdrops.map((image, index) => (
                             <li key={index} className="media-grid-item" >
                                 <div className="media-grid-item-i-w">
-                                    <LazyImage  className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
+                                    <LazyImage  className="media-grid-item-i" src={`${imageBase}w400/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
                                 </div>
                             </li>
                         )) : images.posters.map((image, index) => (
                             <li key={index} className="media-grid-item">
                                 <div className="media-grid-item-i-w">
-                                    <LazyImage className="media-grid-item-i" src={`${imageBase}original/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
+                                    <LazyImage className="media-grid-item-i" src={`${imageBase}w200/${image.file_path}`} data-src={image.file_path} alt="Train to Busan" />
                                 </div>
                             </li>
                         ))}

@@ -482,7 +482,11 @@
     }
 
     .movie-info-sec-wrapper.p-less {
-        padding-top: 25px!important;
+        padding-top: 12px!important;
+    }
+
+    .movie-r-inner {
+        width: 95%!important;
     }
 
     .tv-e-details-header-text, .tv-e-details-header-text span {

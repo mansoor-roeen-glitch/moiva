@@ -104,6 +104,7 @@ export default function HomeRoute(props) {
         }
 
         setResults(prevStates => ({...prevStates, ratedShows: result.responsedata.results}))
+        setResultsLoading(prevStates => ({...prevStates, ratedShowsLoading: false}))
         setIsViewed(prevStates => ({...prevStates, isRatedShows: true}))
       }
 
@@ -119,25 +120,25 @@ export default function HomeRoute(props) {
             <div className="h-grid-sec-wrapper" style={{width: "100%", height: "auto"}}>
 
                 <div className="h-grid-sec-wp" ref={popularmoviesRef} >
-                  <GridElement type="movie" resultLoading={resultLoading.popularMoviesLoading} resultError={resultError} results={results.popularMovies} sort={"Popular movies"}/>
+                  <GridElement type="movie" screenSize={props.screenSize} resultLoading={resultLoading.popularMoviesLoading} resultError={resultError} results={results.popularMovies} sort={"Popular movies"}/>
                 </div>
                 
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
                 
                 <div className="h-grid-sec-wp" ref={ratedmoviesRef}>
-                  <GridElement type="movie" resultLoading={resultLoading.ratedMoviesLoading} resultError={resultError} results={results.ratedMovies} sort={"Top rated movies"}/>
+                  <GridElement type="movie" screenSize={props.screenSize} resultLoading={resultLoading.ratedMoviesLoading} resultError={resultError} results={results.ratedMovies} sort={"Top rated movies"}/>
                 </div>
                 
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
 
                 <div className="h-grid-sec-wp" ref={popularshowsRef} >
-                  <GridElement type="tv" resultLoading={resultLoading.popularShowsLoading} resultError={resultError} results={results.popularShows} sort={"Popular shows"}/>
+                  <GridElement type="tv" screenSize={props.screenSize} resultLoading={resultLoading.popularShowsLoading} resultError={resultError} results={results.popularShows} sort={"Popular shows"}/>
                 </div>  
 
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
                 
                 <div className="h-grid-sec-wp" ref={ratedshowsRef} >
-                  <GridElement type="tv" resultLoading={resultLoading.ratedShowsLoading} resultError={resultError} results={results.ratedShows} sort={"Top rated shows"} />
+                  <GridElement type="tv" screenSize={props.screenSize} resultLoading={resultLoading.ratedShowsLoading} resultError={resultError} results={results.ratedShows} sort={"Top rated shows"} />
                 </div>
 
                 <div className="h-grid-sec-row-gap" style={{width: "100%", height: "90px"}}></div>
