@@ -62,7 +62,7 @@ export default function HeaderElement({screenSize, handleHambClick, isSearch}) {
 
             
             <div className="h-i-right-wrapper">
-                <SearchElement />
+                <SearchElement screenSize={screenSize} />
                 {/* {screenSize.screenWidth <= 940 &&
                     (<div className="h-i-hamb-wrapper" onClick={handleHambClick}>
                         <input type="checkbox"id="h-i-hamb-checkbox" name="h-i-hamb" />

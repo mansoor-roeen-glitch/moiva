@@ -44,7 +44,7 @@ export default function SearchRoute(props) {
                 <div className="search-r-o-inner">
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "55px"}}></div>
                     {!loading && !error && (
-                        <GridElement isSearch={true} results={results} resultLoading={loading} sort="Search Results" />
+                        <GridElement screenSize={props.screenSize} isSearch={true} results={results} resultLoading={loading} sort="Search Results" />
                     )}
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "70px"}}></div>
                 </div>

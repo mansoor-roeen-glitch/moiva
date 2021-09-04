@@ -115,9 +115,10 @@ async function getEpisodes(slug) {
 
 // Stream url
 async function getStreamUrl (slug, type, season, episode) {  // Not available yet for shows 
-
+    console.log(slug, type, season)
     const url = getCorsUrl(`https://lookmovie.site/${type}s/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
+    console.log(pageReq)
     const data = JSON5.parse("{" +
         pageReq
             .slice(pageReq.indexOf(`${type}_storage`))
@@ -192,7 +193,7 @@ async function getVideoUrl (config) {
         }
     }
 
-    return {url: videoUrl.startsWith("/") ? `https://lookmovie.com${videoUrl}` : videoUrl, options: videoOpts};
+    return {url: videoUrl.startsWith("/") ? `https://lookmovie.site${videoUrl}` : videoUrl, options: videoOpts};
 }
 
 let lookmovie = {findContent, getEpisodes, getStreamUrl, getVideoUrl}
