@@ -15,6 +15,7 @@ import MobNav from './components/sub-comps/MobNav.js';
 
 import "./global.css";
 import SearchRoute from "./routes/SearchRoute";
+require('dotenv').config()
 
 function App(props) {
   const [isNavActive, setIsNavActive] = useState(false)

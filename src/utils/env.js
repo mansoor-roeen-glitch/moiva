@@ -1,10 +1,10 @@
-export let imageBase = "https://image.tmdb.org/t/p/";
-export let base_url = "https://moiva-proxy.herokuapp.com";
+export let imageBase = process.env.REACT_APP_IMG_BASE;
+export let base_url = process.env.REACT_APP_PROXY;
 
-export function getCorsUrl (url) {
-    return `https://movie-web-proxy.herokuapp.com/${url}`;
+export function getCorsUrl (url, search) {
+    return `${search ? `${process.env.REACT_APP_WORKER}/?destination=` : `${process.env.REACT_APP_CORS_PROXY}/`}${url}`;
 }
 
 export function getProxyUrl (pathname) {
-    return `https://moiva-proxy.herokuapp.com/${pathname}`
+    return `${base_url}/${pathname}`
 }

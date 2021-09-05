@@ -5,15 +5,15 @@ import errorHandler from '../extra/errorhandler';
 // Access token ..
 async function getAccessToken(config) {
     let url = '';
-
+    console.log(config)
     if (config.type === 'movie') {
-        url = getCorsUrl(`https://lookmovie.site/api/v1/security/movie-access?id_movie=${config.id}&token=1&sk=&step=1`);
+        url = getCorsUrl(`https://lookmovie.io/api/v1/security/movie-access?id_movie=${config.id}&token=1&sk=&step=1`);
     } else if (config.type === 'show') {
-        url = getCorsUrl(`https://lookmovie.site/api/v1/security/show-access?slug=${config.slug}&token=&step=2`);
+        url = getCorsUrl(`https://lookmovie.io/api/v1/security/show-access?slug=${config.slug}&token=&step=2`);
     }
 
     const data = await fetch(url).then((d) => d.json());
-
+    console.log(data)
     const token = data?.data?.accessToken;
     if (token) return token;
 
@@ -28,12 +28,11 @@ async function getAccessToken(config) {
 // this function will be triggered when user clicks on certain movie
 // function will find the content from imdb name and other details
 async function findContent (config, type) {
-
     if (!config) {
         return;
     }
 
-    const searchUrl = getCorsUrl(`https://lookmovie.site/${type}s/search/?q=${encodeURIComponent(config.title)}`);
+    const searchUrl = getCorsUrl(`https://lookmovie.io/${type}s/search/?q=${encodeURIComponent(config.title)}`, true);
     let searchRes;
     try {
         searchRes = await fetch(searchUrl).then(d => d.text())
@@ -87,7 +86,7 @@ async function findContent (config, type) {
 }
 
 async function getEpisodes(slug) {
-    const url = getCorsUrl(`https://lookmovie.site/shows/view/${slug}`);
+    const url = getCorsUrl(`https://lookmovie.io/shows/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
 
     const data = JSON5.parse("{" +
@@ -115,10 +114,8 @@ async function getEpisodes(slug) {
 
 // Stream url
 async function getStreamUrl (slug, type, season, episode) {  // Not available yet for shows 
-    console.log(slug, type, season)
-    const url = getCorsUrl(`https://lookmovie.site/${type}s/view/${slug}`);
+    const url = getCorsUrl(`https://lookmovie.io/${type}s/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
-    console.log(pageReq)
     const data = JSON5.parse("{" +
         pageReq
             .slice(pageReq.indexOf(`${type}_storage`))
@@ -127,6 +124,7 @@ async function getStreamUrl (slug, type, season, episode) {  // Not available ye
             .trim() +
         "}"
     );
+
 
     let id = '';
     if (type === "movie") {
@@ -167,9 +165,9 @@ async function getVideoUrl (config) {
     let url = '';
 
     if (config.type === 'movie') {
-        url = getCorsUrl(`https://lookmovie.site/manifests/movies/json/${config.id}/${now}/${accessToken}/master.m3u8`);
+        url = getCorsUrl(`https://lookmovie.io/manifests/movies/json/${config.id}/${now}/${accessToken}/master.m3u8`);
     } else if (config.type === 'show') {
-        url = getCorsUrl(`https://lookmovie.site/manifests/shows/json/${accessToken}/${now}/${config.id}/master.m3u8`);
+        url = getCorsUrl(`https://lookmovie.io/manifests/shows/json/${accessToken}/${now}/${config.id}/master.m3u8`);
     }
 
     const videoOpts = await fetch(url).then((d) => d.json());
@@ -193,7 +191,7 @@ async function getVideoUrl (config) {
         }
     }
 
-    return {url: videoUrl.startsWith("/") ? `https://lookmovie.site${videoUrl}` : videoUrl, options: videoOpts};
+    return {url: videoUrl.startsWith("/") ? `https://lookmovie.io${videoUrl}` : videoUrl, options: videoOpts};
 }
 
 let lookmovie = {findContent, getEpisodes, getStreamUrl, getVideoUrl}
