@@ -8,7 +8,7 @@ export default function SearchRoute(props) {
 
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("")
-    const [results, setResults] = useState();
+    const [results, setResults] = useState(false);
     const [error, setError] = useState();
 
     
@@ -43,9 +43,9 @@ export default function SearchRoute(props) {
 
                 <div className="search-r-o-inner">
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "55px"}}></div>
-                    {!loading && !error && (
+                    {!loading && !error && results.length > 0 ? (
                         <GridElement screenSize={props.screenSize} isSearch={true} results={results} resultLoading={loading} sort="Search Results" />
-                    )}
+                    ) : ""}
                     <div className="h-grid-sec-row-gap" style={{width: "100%", height: "70px"}}></div>
                 </div>
             </div>

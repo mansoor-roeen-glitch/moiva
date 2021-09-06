@@ -6,7 +6,15 @@ import LazyImage from './LazyImage';
 
 export default function ItemElement({item, type, id, isSearch}) {
 
-    if ( isSearch && !item.release_date) {
+    if (type === "tv" ? !item.first_air_date  : !item.release_date) {
+        return '';
+    }
+    
+    if (isSearch && item.popularity < 10) {
+        return "";
+    }
+
+    if (isSearch && item.vote_average < 4) {
         return "";
     }
 
