@@ -477,6 +477,10 @@
     opacity: .8;
 }
 
+.tv-e-select-item::marker {
+    font-size: 0px!important;
+}
+
 .tv-e-select-i-bg-wrapper {
     display: flex;
     align-items: center;

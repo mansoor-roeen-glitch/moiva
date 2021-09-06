@@ -26,7 +26,7 @@ export default function GridElement({results, sort, type, resultLoading, isSearc
             res.push(results[i])
         }
     } else  {
-        for (let i=0; i < 8; i++ ) {
+        for (let i=0; i < 6; i++ ) {
             res.push(results[i])
         }
     } 

@@ -138,9 +138,10 @@ export default function ShowRoute (props) {
         if (sDetails.season_number !== index) {
             setSLoading(true)
             let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index})
+            console.log(seasonDetails)
             setSDetails(seasonDetails.responsedata)
-            setSLoading(false)
             setSelectedSe(index)
+            setSLoading(false)
         }
     }
 
@@ -200,8 +201,8 @@ export default function ShowRoute (props) {
                     </div>
                     <div className="tv-e-select-wrapper">
                         <ul className="tv-e-select-list">
-                            {episodes && selectedSe && sDetails && episodes.episodes[selectedSe].map((episode, index) => {
-                                if (!sLoading) {
+                            {episodes && selectedSe && sDetails && !sLoading && episodes.episodes[selectedSe].map((episode, index) => {
+                                if (!sLoading && sDetails) {
                                     return (
                                         <li key={index} className="tv-e-select-item" onClick={() => {handleStreamClick(parseInt(episode))}} >
                                             <div className="tv-e-select-i-bg-wrapper">

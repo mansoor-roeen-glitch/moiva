@@ -99,6 +99,10 @@
     width: auto;
 }
 
+.media-grid-item::marker {
+    color: transparent;
+}
+
 .media-grid-item-i-w {
     width: auto;
     height: 260px;
