@@ -1,10 +1,15 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
+import { useState } from 'react/cjs/react.development';
 import { imageBase } from '../../utils/env';
 import LazyImage from './LazyImage';
 
-export default function ItemElement({item, type, id}) {
-    
+export default function ItemElement({item, type, id, isSearch}) {
+
+    if ( isSearch && !item.release_date) {
+        return "";
+    }
+
     let name = type === "movie" ? item.title : item.name;
     let slug = name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
     let release_date = type === "tv" ? item.first_air_date : item.release_date;

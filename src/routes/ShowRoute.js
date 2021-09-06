@@ -178,7 +178,7 @@ export default function ShowRoute (props) {
                     <div className="tv-e-details-wrapper">
                         <div className="tv-e-details-header">
                             <div className="tv-e-details-header-t-wrapper">
-                                <span className="tv-e-details-header-text">{sDetails.episodes[selectedEp].name.split("").length > 25 ? sDetails.episodes[selectedEp].name.split("").slice(0, 20).join("") + "..." : sDetails.episodes[selectedEp].name} <span>(S{sDetails.season_number}:E{sDetails.episodes[selectedEp - 1].episode_number})</span></span>
+                                <span className="tv-e-details-header-text">{sDetails.episodes[selectedEp - 1].name.split("").length > 25 ? sDetails.episodes[selectedEp - 1 ].name.split("").slice(0, 20).join("") + "..." : sDetails.episodes[selectedEp - 1].name} <span>(S{sDetails.season_number}:E{sDetails.episodes[selectedEp - 1].episode_number})</span></span>
                                 <span className="tv-e-details-header-date">Air date {sDetails.episodes[selectedEp].air_date.replaceAll("-", "/").split("/").reverse().join("/")}</span>                        
                             </div>
                             <div className="tv-e-details-header-s-wrapper">
