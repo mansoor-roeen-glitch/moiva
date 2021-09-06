@@ -3,8 +3,6 @@ import Hls from "hls.js";
 
 export default function VideoElement(props) {
 
-    console.log(props)
-
     const [progress, setProgress] = useState();
     const [error, setError] = useState(false);
     

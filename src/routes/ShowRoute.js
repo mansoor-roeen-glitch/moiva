@@ -59,7 +59,6 @@ export default function ShowRoute (props) {
             return;
         }
         
-
         setResult(results)
         setSDetails(seasonDetails.responsedata)
         setLoading(false)
@@ -83,7 +82,7 @@ export default function ShowRoute (props) {
         }  
 
         response = await findContent(title, year.split("-")[0], type)
-        
+            
         if (!response.success) {
             setStreaminfoerror(response)
             setStreaminfoloading(false)
@@ -91,13 +90,10 @@ export default function ShowRoute (props) {
         }
 
         let foundEpisodes = await findEpisodes(response.matchedResult.slug)
-
+        console.log(foundEpisodes)
         // Default values, will change accordingly to the user
-        setSelectedEp(stringify(1))
-        setSelectedSe(stringify(1))
-        
-        setSelectedEp(0)
-        setSelectedSe(0)
+        setSelectedEp(1)
+        setSelectedSe(1)
 
         setEpisodes(foundEpisodes)
         setData(response.matchedResult)
@@ -128,7 +124,7 @@ export default function ShowRoute (props) {
         }
 
         setStreamLoading(true)
-        let streamUrlResponse = await getStreamUrl({slug: data.slug, type: data.type, source: data.source, season: JSON.stringify(selectedSe + 1), episode: JSON.stringify(episode  + 1)})
+        let streamUrlResponse = await getStreamUrl({slug: data.slug, type: data.type, source: data.source, season: JSON.stringify(selectedSe), episode: JSON.stringify(episode )})
         if (!streamUrlResponse.success) {
             
             setStreamError(streamUrlResponse);
@@ -140,9 +136,11 @@ export default function ShowRoute (props) {
 
     const handleSeasonSelect = async (index) => {
         if (sDetails.season_number !== index) {
-            let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index -1})
+            setSLoading(true)
+            let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index})
             setSDetails(seasonDetails.responsedata)
-            setSelectedSe(index -1)
+            setSLoading(false)
+            setSelectedSe(index)
         }
     }
 
@@ -179,23 +177,21 @@ export default function ShowRoute (props) {
                     <div className="tv-e-details-wrapper">
                         <div className="tv-e-details-header">
                             <div className="tv-e-details-header-t-wrapper">
-                                <span className="tv-e-details-header-text">{sDetails.episodes[selectedEp].name} <span>(S{sDetails.season_number}:E{sDetails.episodes[selectedEp].episode_number})</span></span>
+                                <span className="tv-e-details-header-text">{sDetails.episodes[selectedEp].name.split("").length > 25 ? sDetails.episodes[selectedEp].name.split("").slice(0, 20).join("") + "..." : sDetails.episodes[selectedEp].name} <span>(S{sDetails.season_number}:E{sDetails.episodes[selectedEp - 1].episode_number})</span></span>
                                 <span className="tv-e-details-header-date">Air date {sDetails.episodes[selectedEp].air_date.replaceAll("-", "/").split("/").reverse().join("/")}</span>                        
                             </div>
                             <div className="tv-e-details-header-s-wrapper">
                                 <div className="tv-e-s-btn-wrapper">
                                     <svg className="tv-e-btn-svg" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M20 15h4.071v2h-4.071v4.071h-2v-4.071h-4.071v-2h4.071v-4.071h2v4.071zm-8 6h-12v-2h12v2zm0-4.024h-12v-2h12v2zm0-3.976h-12v-2h12v2zm12-4h-24v-2h24v2zm0-4h-24v-2h24v2z"/></svg>
-                                    <button className="tv-e-s-btn" onClick={() => {setSactive(!sactive)}}>Season {selectedSe + 1}</button>
+                                    <button className="tv-e-s-btn" onClick={() => {setSactive(!sactive)}}>Season {selectedSe}</button>
                                 </div>
                                 <div className={`tv-e-details-header-s-l-wrapper${sactive ? " s-l-active" : ""}`}>
                                     <ul className="tv-e-details-header-s-l">
-                                        {result.seasons.map((season, index) => {
-                                            if (index !== 0) {
-                                                return (
-                                                    <li key={index} className="tv-e-details-header-s-i" onClick={() => {handleSeasonSelect(index); setSactive(!setSactive)}}>
-                                                       <span className="tv-e-details-header-s-i-text">season {index}</span>
-                                                   </li>)
-                                            }
+                                        {episodes.seasons.map((season, index) => {
+                                            return (
+                                                <li key={index} className="tv-e-details-header-s-i" onClick={() => {handleSeasonSelect(parseInt(season)); setSactive(!setSactive)}}>
+                                                    <span className="tv-e-details-header-s-i-text">season {season}</span>
+                                                </li>)
                                         })}
                                     </ul>
                                 </div>
@@ -204,19 +200,21 @@ export default function ShowRoute (props) {
                     </div>
                     <div className="tv-e-select-wrapper">
                         <ul className="tv-e-select-list">
-                            {sDetails && sDetails.episodes.map((episode, index) => {
-                                return (
-                                    <li key={index} className="tv-e-select-item" onClick={() => {handleStreamClick(index)}} >
-                                        <div className="tv-e-select-i-bg-wrapper">
-                                            <img className="tv-e-select-i-bg-wrapper" data-src={episode.still_path} src={`${imageBase}w200${episode.still_path}`} alt={episode.name}></img>
-                                            <div className="tv-e-select-i-bg-overlay"></div>
-                                        </div>
-                                        <div className="tv-e-select-i-header-wrapper">
-                                            <span className="tv-e-select-header-text">{episode.name}</span>
-                                            <span className="tv-e-select-header-date">{episode.air_date}</span>
-                                        </div>
-                                    </li>
-                                )
+                            {episodes && selectedSe && sDetails && episodes.episodes[selectedSe].map((episode, index) => {
+                                if (!sLoading) {
+                                    return (
+                                        <li key={index} className="tv-e-select-item" onClick={() => {handleStreamClick(parseInt(episode))}} >
+                                            <div className="tv-e-select-i-bg-wrapper">
+                                                <img className="tv-e-select-i-bg-wrapper" data-src={sDetails.episodes[index].still_path} src={`${imageBase}w200${sDetails.episodes[index].still_path}`} ></img>
+                                                <div className="tv-e-select-i-bg-overlay"></div>
+                                            </div>
+                                            <div className="tv-e-select-i-header-wrapper">
+                                                <span className="tv-e-select-header-text">{sDetails.episodes[index].name}</span>
+                                                <span className="tv-e-select-header-date">{sDetails.episodes[index].air_date}</span>
+                                            </div>
+                                        </li>
+                                    )
+                                }
                             })}
                         </ul>
                     </div>
@@ -263,7 +261,7 @@ export default function ShowRoute (props) {
                             </div>
                             <div className="tv-info-sec-details-col2-row3">
                                 <div className="tv-info-sec-bts-wraper">
-                                    <div onClick={() => {!streaminfoerror && !streaminfoloading && handleStreamClick(0)}} className={`tv-info-sec-btn${streaminfoerror ? " streaminfoerror" : ""}`} id="m-i-s-btn1">
+                                    <div onClick={() => {!streaminfoerror && !streaminfoloading && handleStreamClick(selectedEp)}} className={`tv-info-sec-btn${streaminfoerror ? " streaminfoerror" : ""}`} id="m-i-s-btn1">
                                         <span className="tv-info-sec-btn-text" id="m-i-s-btn1-text">{streaminfoloading && !streaminfoerror ? "Loading" : !streaminfoerror ? "Watch now" : "Not available"}</span>
                                     </div>
                                     <div className="tv-info-sec-btn" id="m-i-s-btn2">
