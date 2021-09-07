@@ -90,7 +90,6 @@ export default function ShowRoute (props) {
         }
 
         let foundEpisodes = await findEpisodes(response.matchedResult.slug)
-        console.log(foundEpisodes)
         // Default values, will change accordingly to the user
         setSelectedEp(1)
         setSelectedSe(1)
@@ -179,7 +178,7 @@ export default function ShowRoute (props) {
                         <div className="tv-e-details-header">
                             <div className="tv-e-details-header-t-wrapper">
                                 <span className="tv-e-details-header-text">{sDetails.episodes[selectedEp - 1].name.split("").length > 25 ? sDetails.episodes[selectedEp - 1 ].name.split("").slice(0, 20).join("") + "..." : sDetails.episodes[selectedEp - 1].name} <span>(S{sDetails.season_number}:E{sDetails.episodes[selectedEp - 1].episode_number})</span></span>
-                                <span className="tv-e-details-header-date">Air date {sDetails.episodes[selectedEp].air_date.replaceAll("-", "/").split("/").reverse().join("/")}</span>                        
+                                <span className="tv-e-details-header-date">Air date {sDetails.episodes[selectedEp - 1].air_date.replaceAll("-", "/").split("/").reverse().join("/")}</span>                        
                             </div>
                             <div className="tv-e-details-header-s-wrapper">
                                 <div className="tv-e-s-btn-wrapper">

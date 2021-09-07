@@ -5,7 +5,6 @@ import errorHandler from '../extra/errorhandler';
 // Access token ..
 async function getAccessToken(config) {
     let url = '';
-    console.log(config)
     if (config.type === 'movie') {
         url = getCorsUrl(`https://lookmovie.io/api/v1/security/movie-access?id_movie=${config.id}&token=1&sk=&step=1`);
     } else if (config.type === 'show') {
@@ -13,7 +12,6 @@ async function getAccessToken(config) {
     }
 
     const data = await fetch(url).then((d) => d.json());
-    console.log(data)
     const token = data?.data?.accessToken;
     if (token) return token;
 
