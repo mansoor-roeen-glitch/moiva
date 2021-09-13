@@ -3,6 +3,7 @@ import GridElement from '../components/GridElement'
 import HeaderElement from '../components/HeaderElement'
 import { fetchData, searchitem } from '../functions/extra/fetch'
 import '../components/styles/searchRoute.css'
+import { Helmet } from 'react-helmet'
 
 export default function SearchRoute(props) {
 
@@ -31,6 +32,9 @@ export default function SearchRoute(props) {
 
     return (
         <div className="search-route-o-wrapper">
+            <Helmet>
+              <title>Moiva | Search</title>
+            </Helmet>
             <HeaderElement isSearch={true} handleHambClick={props.handleHambClick} screenSize={props.screenSize} />
 
             <div className="search-route-i-wrapper">

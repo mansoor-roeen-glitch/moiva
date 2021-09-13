@@ -9,6 +9,7 @@ import '../components/styles/movieRouteStyles.css'
 import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/loader.css"
 import { imageBase } from '../utils/env';
+import HelmetExport, { Helmet } from 'react-helmet';
 
 export default function MovieRoute (props) {
 
@@ -17,6 +18,8 @@ export default function MovieRoute (props) {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
     const [streamOptions, setStreamOptions] = useState();
+    const [streamSubtitles, setStreamSubtitles] = useState();
+
     const [streamerror, setStreamerror] = useState(false);
     const [streamloading, setStreamloading] = useState(false);
     const [streaminfoerror, setStreaminfoerror] = useState(false);
@@ -95,8 +98,8 @@ export default function MovieRoute (props) {
         }
 
         setClicked(true)
-
         setStreamloading(true)
+        
         let streamUrlResponse = await getStreamUrl(data)
 
         if (!streamUrlResponse.success) {
@@ -106,7 +109,8 @@ export default function MovieRoute (props) {
             return;
         }
 
-        setStreamOptions({url: streamUrlResponse.url, options: streamUrlResponse.options});
+        setStreamOptions({url: streamUrlResponse.url, options: streamUrlResponse.options.videoOpts});
+        setStreamSubtitles(streamUrlResponse.options.subtitles)
         setStreamloading(false)
         setLoading(false)
 
@@ -117,8 +121,11 @@ export default function MovieRoute (props) {
     }
 
     if (!result) {
-        return (
+        return (            
             <div className="loading-screen">
+                <Helmet>
+                    <title>Moiva | Loading</title>
+                </Helmet>
                 <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                     <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                 </svg>
@@ -129,6 +136,9 @@ export default function MovieRoute (props) {
     return (
 
         <div className="movie-r-wrapper">
+            <Helmet>
+                <title>Moiva | {result.title}</title>
+            </Helmet>
             <HeaderElement handleHambClick={props.handleHambClick} screenSize={props.screenSize} />
             <div className={`movie-info-sec-bg-wrapper${clicked ? " video-playing" : ""}`}>
                 <div className="movie-info-sec-bg-overlay"></div>
@@ -139,7 +149,7 @@ export default function MovieRoute (props) {
 
             {clicked && (
                 <div className="movie-player-wrapper">
-                    <VideoElement streamType="movie" streamLoading={streamloading} streamOptions={streamOptions} />
+                    <VideoElement streamType="movie" streamLoading={streamloading} streamOptions={streamOptions} streamSubtitles={streamSubtitles} />
                 </div>
             )}
 

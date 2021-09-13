@@ -4,6 +4,7 @@ import HeroElement from '../components/HeroElement';
 import GridElement from '../components/GridElement';
 import { getCorsUrl, getProxyUrl, homeScrapper } from '../utils/env';
 import {useOnScreen} from '../functions/extra/useOnScreen';
+import { Helmet } from 'react-helmet';
 
 export default function HomeRoute(props) {
     
@@ -66,7 +67,6 @@ export default function HomeRoute(props) {
 
       if (isPopularshowsVisible && !isViewed.isPopularShows) {
         let result = await getResponse('popular-tvs')
-        console.log(result)
         
         if (result.success === false || !result.statuscode === 200 && result.responsedata.results.length <= 0) {
           setResultError(result);
@@ -80,9 +80,7 @@ export default function HomeRoute(props) {
       } 
 
       if (isRatedmoviesVisible && !isViewed.isRatedMovies) {
-        console.log("something")
         let result = await getResponse('rated-movies')
-        console.log(result)
         if (result.success === false || !result.statuscode === 200 && result.responsedata.results.length <= 0) {
           setResultError(result);
           setResultsLoading(prevStates => ({...prevStates, ratedMoviesLoading: false}))
@@ -96,7 +94,6 @@ export default function HomeRoute(props) {
 
       if (isRatedshowsVisible && !isViewed.isRatedShows) {
         let result = await getResponse('rated-tvs')
-        console.log(result)
         if (result.success === false || !result.statuscode === 200 && result.responsedata.results.length <= 0) {
           setResultError(result);
           setResultsLoading(prevStates => ({...prevStates, ratedShowsLoading: false}))
@@ -112,7 +109,13 @@ export default function HomeRoute(props) {
 
     return (
         
-        <div className="h-o-wrapper" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>        
+        <div className="h-o-wrapper" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>     
+
+            <Helmet>
+              <title>Moiva | Home</title>
+            </Helmet>
+
+
             <HeaderElement screenSize={props.screenSize} handleHambClick={props.handleHambClick} />
             <HeroElement screenSize={props.screenSize} />
             <div className="h-s-1-gap" style={{width: "100%", height: "70px"}}></div>

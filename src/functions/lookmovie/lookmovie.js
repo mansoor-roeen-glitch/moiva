@@ -12,8 +12,9 @@ async function getAccessToken(config) {
     }
 
     const data = await fetch(url).then((d) => d.json());
+    const subtitles = data?.data?.subtitles;
     const token = data?.data?.accessToken;
-    if (token) return token;
+    if (token) return {subtitles, token};
 
     return errorHandler(
         "Invalid type provided in config",
@@ -154,11 +155,20 @@ async function getStreamUrl (slug, type, season, episode) {  // Not available ye
 
 }
 
+const getShowSubs = async (config) => {
+    let url = getCorsUrl(`https://lookmovie.site/api/v1/shows/episode-subtitles/?id_episode=${config.id}`)
+    let subtitles = await fetch(url).then(res => res.json()).catch(err => err)
+    return subtitles;
+}   
+
 // Getting url for the video 
 // function will be called by getStreamUrl
 async function getVideoUrl (config) {
-    const accessToken = await getAccessToken(config);
+    const accesstokenres = await getAccessToken(config);
+    const accessToken = await accesstokenres.token;
     const now = Math.floor(Date.now() / 1e3);
+
+    let showSubs = false;
 
     let url = '';
 
@@ -169,6 +179,10 @@ async function getVideoUrl (config) {
     }
 
     const videoOpts = await fetch(url).then((d) => d.json());
+    
+    if (config.type === "show") {
+        showSubs = await getShowSubs(config)
+    }
 
     if (!videoOpts) {
         return errorHandler(
@@ -189,7 +203,7 @@ async function getVideoUrl (config) {
         }
     }
 
-    return {url: videoUrl.startsWith("/") ? `https://lookmovie.io${videoUrl}` : videoUrl, options: videoOpts};
+    return {url: videoUrl.startsWith("/") ? `https://lookmovie.io${videoUrl}` : videoUrl, options: {videoOpts, subtitles: config.type === "show" ? showSubs : accesstokenres.subtitles}};
 }
 
 let lookmovie = {findContent, getEpisodes, getStreamUrl, getVideoUrl}

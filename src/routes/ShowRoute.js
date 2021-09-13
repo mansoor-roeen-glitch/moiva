@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import { imageBase } from '../utils/env';
 import {findContent, getStreamUrl, findEpisodes} from '../functions/lookmovie/index';
 import VideoElement from '../components/VideoElement';
-import { stringify } from 'json5';
 import errorHandler from '../functions/extra/errorhandler';
 import HeaderElement from '../components/HeaderElement';
 import CastWrapper from '../components/CastWrapper';
@@ -10,7 +9,7 @@ import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/tvRouteStyles.css"
 import "../components/styles/loader.css"
 import { fetchData } from '../functions/extra/fetch';
-import { useOnScreen } from '../functions/extra/useOnScreen';
+import { Helmet } from 'react-helmet';
 
 export default function ShowRoute (props) {
     
@@ -20,7 +19,9 @@ export default function ShowRoute (props) {
     const [result, setResult] = useState();
     const [episodes, setEpisodes] = useState();
     const [loading, setLoading] = useState(true);
+
     const [streamOptions, setStreamOptions] = useState();
+    const [streamSubtitles, setStreamSubtitles] = useState();
 
     const [sDetails, setSDetails] = useState();
     const [sLoading, setSLoading] = useState(true); 
@@ -129,7 +130,8 @@ export default function ShowRoute (props) {
             setStreamError(streamUrlResponse);
             setStreamLoading(false)
         }
-        setStreamOptions({url: streamUrlResponse.url, options: streamUrlResponse.options});
+        setStreamOptions({url: streamUrlResponse.url, options: streamUrlResponse.options.videoOpts});
+        setStreamSubtitles(streamUrlResponse.options.subtitles)
         setStreamLoading(false)
     }
 
@@ -137,7 +139,6 @@ export default function ShowRoute (props) {
         if (sDetails.season_number !== index) {
             setSLoading(true)
             let seasonDetails = await fetchData("get-season-details", {id: result.id, seasonNumber: index})
-            console.log(seasonDetails)
             setSDetails(seasonDetails.responsedata)
             setSelectedSe(index)
             setSLoading(false)
@@ -147,6 +148,9 @@ export default function ShowRoute (props) {
     if (loading) {
         return (
             <div className="loading-screen">
+                <Helmet>
+                    <title>Show | Loading | Moiva</title>
+                </Helmet>
                 <svg className="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                     <circle className="path" fill="none" strokeWidth="6" strokeLinecap="round" cx="33" cy="33" r="30"></circle>
                 </svg>
@@ -157,6 +161,9 @@ export default function ShowRoute (props) {
     return (
         
         <div className="tv-r-wrapper">
+            <Helmet>
+                <title>Show | {result.name} | Moiva</title>
+            </Helmet>
             <HeaderElement handleHambClick={props.handleHambClick} screenSize={props.screenSize} />
             <div className={`tv-info-sec-bg-wrapper${clicked ? " video-playing" : ""}`}>
                 <div className="tv-info-sec-bg-overlay"></div>
@@ -167,7 +174,7 @@ export default function ShowRoute (props) {
 
             {clicked && (
                 <div className="tv-player-wrapper">
-                    <VideoElement streamType="episode" streamLoading={streamloading} streamOptions={streamOptions} />
+                    <VideoElement streamType="episode" streamLoading={streamloading} streamOptions={streamOptions} streamSubtitles={streamSubtitles} />
                 </div>
             )}  
 

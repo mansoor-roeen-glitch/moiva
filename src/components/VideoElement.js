@@ -5,13 +5,17 @@ export default function VideoElement(props) {
 
     const [progress, setProgress] = useState();
     const [error, setError] = useState(false);
-    
-    const videoRef = React.useRef(null);
+    const [subtitles, setSubtitles] = useState();
 
+    const videoRef = React.useRef(null);
 
     useEffect(() => {
         if (props.streamLoading) {
             return;
+        }   
+
+        if (props.streamSubtitles) {
+            setSubtitles(props.streamSubtitles)
         }
 
         if (!props.streamOptions.url.endsWith(".mp4")) {
@@ -45,7 +49,9 @@ export default function VideoElement(props) {
 
     if (!props.streamOptions.url.endsWith('.mp4')) { 
         return (
-            <video className="videoElement" ref={videoRef} controls autoPlay onProgress={setProgress} />
+            <video crossOrigin="anonymous"  className="videoElement" ref={videoRef} controls autoPlay onProgress={setProgress}>
+                {subtitles && subtitles.map((sub) => {return <track srclang="en" src={`https://lookmovie.site${sub.file}`} kind={sub.kind} lang={sub.lang} label={sub.language} ></track>})}
+            </video>
         )
     } else {
         return (

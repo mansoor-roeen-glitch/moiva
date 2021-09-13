@@ -7,6 +7,8 @@ import {
   Redirect
 } from "react-router-dom";
 
+import { Helmet } from "react-helmet";
+
 // Importing different routes
 import ShowItem from './routes/ShowRoute';
 import HomeRoute from './routes/HomeRoute'; 
@@ -61,6 +63,10 @@ function App(props) {
 
   return (
     <Router>  
+
+      <Helmet>
+        <title>Moiva | Home</title>
+      </Helmet>
 
       {screenWidth <= 940 && (
         <MobNav isActive={isNavActive} />
