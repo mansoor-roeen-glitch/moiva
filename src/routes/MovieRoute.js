@@ -9,7 +9,7 @@ import '../components/styles/movieRouteStyles.css'
 import MediaWrapper from '../components/MediaWrapper';
 import "../components/styles/loader.css"
 import { imageBase } from '../utils/env';
-import HelmetExport, { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 export default function MovieRoute (props) {
 

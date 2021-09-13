@@ -96,7 +96,7 @@
 
 .media-grid-item {
     height: 260px;
-    width: auto;
+    width: auto; 
 }
 
 .media-grid-item::marker {

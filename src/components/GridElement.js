@@ -62,7 +62,6 @@ export default function GridElement({results, sort, type, resultLoading, isSearc
                     {!isSearch ? !loaded && results[0] === "dummy" ? res.map((item, index) => {return <ItemPlaceholder key={index} />}) : res.map((item, index) => {
                         return <ItemElement item={item} type={type} id={item.id} isSearch={isSearch} /> })
                         : res.map((item, index) => {
-                            console.log(item)
                             if (item) {
                                 if (item.media_type === "movie" || item.media_type === "tv" ) {
                                     return <ItemElement item={item} type={item.media_type} id={item.id} isSearch={isSearch} />
