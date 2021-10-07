@@ -115,6 +115,9 @@ async function getEpisodes(slug) {
 async function getStreamUrl (slug, type, season, episode) {  // Not available yet for shows 
     const url = getCorsUrl(`https://lookmovie.io/${type}s/view/${slug}`);
     const pageReq = await fetch(url).then((d) => d.text());
+
+    console.log(pageReq)
+
     const data = JSON5.parse("{" +
         pageReq
             .slice(pageReq.indexOf(`${type}_storage`))
